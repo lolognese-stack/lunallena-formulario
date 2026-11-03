@@ -131,6 +131,62 @@
     ctx: { origen: qs.get('origen'), utm_source: qs.get('utm_source'), utm_campaign: qs.get('utm_campaign') }
   };
 
+  // ---- avance paso a paso -> CRM (/api/evento-form/, vercel.json lo reenvía) ----
+  // Cada paso visto, completado, vuelto atrás o con error, más abierto, enviado,
+  // WhatsApp y salida. Sale en lotes (cada 5 s o al cerrar la página). Lleva
+  // solo respuestas sin datos personales: del nombre, el WhatsApp y las notas,
+  // solo el largo. Lo completo llega con el lead (/api/cotizar-web/). El CRM
+  // descarta las sesiones del equipo (interno). Se ve en Formulario del CRM.
+  var API_FORM = '/api/evento-form/';
+  var fm = { cola: [], visto: null, tVisto: Date.now() };
+  function fmDispositivo() { var w = window.innerWidth || 0; return w < 700 ? 'movil' : w < 1100 ? 'tablet' : 'desktop'; }
+  function fmEvento(tipo, paso, extra) {
+    fm.cola.push(Object.assign({ tipo: tipo, paso: paso || null, indice: st.idx, t_ms: Date.now() - st.inicio,
+      cliente_en: new Date().toISOString() }, extra || {}));
+    if (fm.cola.length >= 20) fmEnviar();
+  }
+  function fmEnviar(alCerrar) {
+    if (!fm.cola.length) return;
+    var v = vt();
+    var body = JSON.stringify({
+      sesion_id: st.id, formulario: 'cotizar-web',
+      ctx: {
+        dispositivo: fmDispositivo(), pais: st.iso || null, origen: st.ctx.origen, utm_source: st.ctx.utm_source,
+        utm_campaign: st.ctx.utm_campaign, manychat_id: v ? v.manychatId() : null, referer: document.referrer || null,
+        restaurado: st.restaurado, pasos_total: pasos(st.d).length, rama: st.d.itinerario, interno: v ? v.interno() : false
+      },
+      eventos: fm.cola.splice(0, 40)
+    });
+    try {
+      if (alCerrar && navigator.sendBeacon && navigator.sendBeacon(API_FORM, new Blob([body], { type: 'application/json' }))) return;
+      fetch(API_FORM, { method: 'POST', headers: { 'content-type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
+    } catch (e) {}
+  }
+  // Respuesta de cada paso, sin datos personales.
+  function fmDatos(clave, d) {
+    switch (clave) {
+      case 'itinerario': return { itinerario: d.itinerario };
+      case 'dias': return { dias: d.dias };
+      case 'armar': return { destinos: d.tramos.map(function (t) { return t.nombre; }), tramos: d.tramos.length };
+      case 'duracion': return { dias: d.diasMin, dias_max: d.diasMax };
+      case 'destinos': return { destinos: d.destinos.map(function (x) { return nombreDestino(x.id); }), otros: (d.otros || '').trim() };
+      case 'fecha': return { fecha: d.fechaExacta, mes: d.fechaExacta ? d.fechaExacta.slice(0, 7) : d.mes };
+      case 'pasajes': return { pasajes: d.pasajes };
+      case 'personas': return { adultos: d.adultos, ninos: d.ninos };
+      case 'nombre': return { largo: (d.nombre || '').trim().length };
+      case 'whatsapp': return { largo: (d.whatsapp || '').replace(/\D/g, '').length };
+      case 'presupuesto': return { presupuesto: d.presupuesto };
+      case 'presupuestoRango': return { rango: d.presupuestoRango };
+      case 'notas': return { largo: (d.notas || '').trim().length };
+    }
+    return null;
+  }
+  setInterval(function () { fmEnviar(); }, 5000);
+  addEventListener('pagehide', function () {
+    if (!st.completado) fmEvento('salida', pasos(st.d)[st.idx]);
+    fmEnviar(true);
+  });
+
   function pasos(d) {
     var p = ['itinerario'];
     if (d.itinerario === 'si') {
@@ -699,6 +755,7 @@
   var errorEl = null;
   function quitarError() { if (errorEl) { errorEl.remove(); errorEl = null; } }
   function mostrarError(msj) {
+    fmEvento('error_validacion', pasos(st.d)[st.idx], { datos: { mensaje: msj } });
     quitarError();
     errorEl = document.createElement('p');
     errorEl.className = 'error';
@@ -724,6 +781,7 @@
     st.idx = Math.min(st.idx, lista.length - 1);
     var clave = lista[st.idx];
     var p = PASOS[clave];
+    if (fm.visto !== clave + ':' + st.idx) { fm.visto = clave + ':' + st.idx; fm.tVisto = Date.now(); fmEvento('paso_visto', clave); }
     progreso(Math.round(8 + (st.idx / lista.length) * 88));
     var d = st.d;
     var conOpciones = !!p.opciones;
@@ -779,6 +837,7 @@
 
   function avanzar() {
     var lista = pasos(st.d);
+    fmEvento('paso_completado', lista[st.idx], { dur_ms: Date.now() - fm.tVisto, datos: fmDatos(lista[st.idx], st.d) });
     // Al pasar el WhatsApp ya se guarda el contacto, por si abandona después.
     if (lista[st.idx] === 'whatsapp') enviarParcial();
     if (st.idx >= lista.length - 1) return terminar();
@@ -788,6 +847,7 @@
   }
   function retroceder() {
     if (st.idx === 0) return;
+    fmEvento('paso_atras', pasos(st.d)[st.idx]);
     st.idx--;
     guardar();
     render();
@@ -887,6 +947,8 @@
   }
 
   async function terminar() {
+    fmEvento('enviado', 'final', { indice: pasos(st.d).length });
+    fmEnviar();
     st.completado = true;
     st.envio = 'enviando';
     guardar();
@@ -1017,6 +1079,8 @@
 
     var btn = $('#wa');
     if (btn) btn.addEventListener('click', function () {
+      fmEvento('click_whatsapp', 'final');
+      fmEnviar(true);
       // ll-t.js ya suma la ref LL- al texto y cuenta el clic; acá se anota en el lead.
       fetch(API_LEAD, {
         method: 'POST', headers: { 'content-type': 'application/json' },
@@ -1122,6 +1186,7 @@
       if (j && j.prefijo) st.prefijo = '+' + j.prefijo + ' ' + (j.iso === 'AR' ? '9 ' : '');
     })
     .catch(function () {});
+  fmEvento('abierto', null, { datos: { restaurado: st.restaurado } });
   render(false);
   try {
     var pendiente = JSON.parse(localStorage.getItem(CLAVE_PENDIENTE) || 'null');
