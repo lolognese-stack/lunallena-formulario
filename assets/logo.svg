@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Luna Llena Travel">
+  <defs>
+    <clipPath id="sky">
+      <path d="M0 0H662V355L610 465L563 560L482 652L388 638L300 690L200 810H0Z"/>
+    </clipPath>
+  </defs>
+  <rect width="1080" height="1080" fill="#FF7A00"/>
+  <circle cx="440" cy="478" r="210" fill="#FFFFFF" clip-path="url(#sky)"/>
+  <polyline points="200,810 300,690 388,638 482,652 563,560 610,465 662,355 712,412 760,500 790,610 877,810"
+    fill="none" stroke="#161616" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

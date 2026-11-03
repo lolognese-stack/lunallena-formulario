@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "headers": [
+    { "source": "/guia/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }] }
+  ],
+  "rewrites": [
+    { "source": "/api/evento-web/", "destination": "https://crm-plantilla.pages.dev/api/evento-web" },
+    { "source": "/api/cotizacion-web/", "destination": "https://crm-plantilla.pages.dev/api/cotizacion-web" },
+    { "source": "/api/cotizar-web/", "destination": "https://crm-plantilla.pages.dev/api/cotizar-web" },
+    { "source": "/api/pais/", "destination": "/api/pais" }
+  ]
+}

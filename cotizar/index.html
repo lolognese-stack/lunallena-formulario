@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cuéntanos sobre tu viaje · Luna Llena Travel</title>
+  <meta name="description" content="Cuéntanos sobre tu viaje por Perú y te armamos una propuesta personalizada con cotización. Agencia en Cusco y Lima con más de 8 años de experiencia.">
+  <meta property="og:title" content="Cuéntanos sobre tu viaje · Luna Llena Travel">
+  <meta property="og:description" content="Te armamos una propuesta personalizada para viajar por Perú.">
+  <meta property="og:image" content="https://lunallenatravel.vercel.app/assets/wp/2023/11/mapi5-1536x592.jpg">
+  <meta name="theme-color" content="#1E1B18">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cotizar/cotizar.css">
+</head>
+<body>
+  <div id="fondo" aria-hidden="true"></div>
+  <main id="app">
+    <header class="logo-wrap">
+      <a href="/" aria-label="Luna Llena Travel, ir a la web">
+        <!-- Isotipo sin el cuadrado naranja: luna blanca, montaña rellena de naranja -->
+        <svg class="logo" viewBox="180 250 720 580" role="img" aria-label="Luna Llena Travel">
+          <defs>
+            <clipPath id="ll-cielo"><path d="M0 0H662V355L610 465L563 560L482 652L388 638L300 690L200 810H0Z"/></clipPath>
+          </defs>
+          <circle cx="440" cy="478" r="210" fill="#FFFFFF" clip-path="url(#ll-cielo)"/>
+          <polygon points="200,810 300,690 388,638 482,652 563,560 610,465 662,355 712,412 760,500 790,610 877,810" fill="#FF7A00"/>
+          <polyline points="200,810 300,690 388,638 482,652 563,560 610,465 662,355 712,412 760,500 790,610 877,810"
+            fill="none" stroke="#161616" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </header>
+    <div class="progreso">
+      <p id="progreso-texto"></p>
+      <div class="barra" role="progressbar" aria-label="Progreso del formulario" aria-valuemin="0" aria-valuemax="100"><div id="progreso-barra"></div></div>
+    </div>
+    <section id="paso" aria-live="polite"></section>
+    <ul class="confianza" id="confianza" aria-label="Por qué confiar en nosotros">
+      <li><b>+8 años</b> armando viajes</li>
+      <li><b>Agencia registrada</b> en Perú</li>
+      <li><b>4,9 ★</b> en TripAdvisor</li>
+    </ul>
+    <!-- Honeypot: invisible para personas; si llega con texto, el CRM lo descarta -->
+    <input class="oculto" id="apellido_2" name="apellido_2" tabindex="-1" autocomplete="off" aria-hidden="true">
+  </main>
+  <pre id="debug" hidden></pre>
+  <script src="/assets/ll-t.js" defer></script>
+  <script src="/cotizar/scoring.js" defer></script>
+  <script src="/cotizar/cotizar.js" defer></script>
+</body>
+</html>

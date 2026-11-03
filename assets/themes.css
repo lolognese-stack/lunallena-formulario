@@ -1,0 +1,188 @@
+/* Luna Llena Travel — estilos alternativos para comparar.
+   Sin data-theme (o "actual") se ve el estilo base de styles.css. */
+
+/* ================= EDITORIAL DE REVISTA ================= */
+[data-theme="editorial"] {
+  --font-head: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --ink: #121212; --ink-2: #2E2E2E; --muted: #6B6B6B; --line: #E4E4E4; --sand: #F5F4F1; --orange-soft: #FFF1E3;
+  --shadow: none; --shadow-lg: none;
+}
+[data-theme="editorial"] :is(h1, h2, h3, h4) { font-weight: 400; letter-spacing: -.015em; }
+[data-theme="editorial"] h1 { font-size: clamp(2.6rem, 6.4vw, 5.4rem); }
+[data-theme="editorial"] h2 { font-size: clamp(2rem, 4.2vw, 3.4rem); }
+[data-theme="editorial"] :is(.trust-strip__card, .cat, .pkg, .why__media img, .review, .card, .cta-band, .gallery figure, .day__card, .acc, .summary, .trust-box, .choice label, .field input, .field select, .stepper, .modal__box, .review__photo, .pkg__tag, .chip, .source-chip, .step, .step__media, .price-block, .tag, .trust-item__icon, .why__badge, .trust-grid div, .summary__img, .mini-review__ph, .book__card) { border-radius: 0 !important; }
+[data-theme="editorial"] .btn { border-radius: 0; font: 600 .78rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; box-shadow: none; }
+[data-theme="editorial"] .btn--ghost { box-shadow: inset 0 0 0 1px var(--ink); }
+[data-theme="editorial"] .nav a { font: 500 .76rem/1 var(--font-body); letter-spacing: .16em; text-transform: uppercase; border-radius: 0; }
+[data-theme="editorial"] .nav a:hover, [data-theme="editorial"] .nav a[aria-current="page"] { background: none; box-shadow: inset 0 -1px 0 var(--ink); }
+[data-theme="editorial"] .brand--logo img { border-radius: 0; }
+[data-theme="editorial"] .eyebrow { font: 600 .72rem/1 var(--font-body); letter-spacing: .2em; }
+[data-theme="editorial"] .eyebrow::before { display: none; }
+[data-theme="editorial"] .hero::after { background: linear-gradient(90deg, rgba(0,0,0,.66), rgba(0,0,0,.1) 72%); }
+[data-theme="editorial"] .hero h1 em { font-style: italic; color: #FFB877; }
+[data-theme="editorial"] .trust-strip__card { border: 1px solid var(--ink); }
+[data-theme="editorial"] .trust-item + .trust-item { border-color: var(--ink); }
+[data-theme="editorial"] .trust-item__icon { display: none; }
+[data-theme="editorial"] .why__item { grid-template-columns: 1fr; }
+[data-theme="editorial"] .trust-item b { font: 400 1.9rem/1 var(--font-head); }
+[data-theme="editorial"] .cat { aspect-ratio: 3/4.4; }
+[data-theme="editorial"] .cat h3 { font-size: 1.5rem; }
+[data-theme="editorial"] .pkg { border: 0; background: none; }
+[data-theme="editorial"] .pkg__body { padding: 16px 0 0; }
+[data-theme="editorial"] .pkg h3 { font-size: 1.35rem; line-height: 1.2; }
+[data-theme="editorial"] .pkg__price b { font: 400 1.5rem/1 var(--font-head); }
+[data-theme="editorial"] .section--sand { background: #fff; border-block: 1px solid var(--ink); }
+[data-theme="editorial"] .why__badge { background: var(--ink); color: #fff; }
+[data-theme="editorial"] .why__badge b { font-weight: 400; font-style: italic; }
+[data-theme="editorial"] .review { border-color: var(--ink); }
+[data-theme="editorial"] .card { border-color: var(--ink); }
+[data-theme="editorial"] .cta-band { background: var(--ink); color: #fff; }
+[data-theme="editorial"] .cta-band p { color: rgba(255,255,255,.75); }
+[data-theme="editorial"] .cta-band .btn--dark { background: var(--orange); color: var(--ink); }
+[data-theme="editorial"] .footer { background: #fff; color: var(--ink-2); border-top: 1px solid var(--ink); }
+[data-theme="editorial"] .footer :is(h4, .brand__name) { color: var(--ink); }
+[data-theme="editorial"] .footer__legal { border-color: var(--line); }
+/* Itinerario editorial: fotos grandes que alternan de lado */
+[data-theme="editorial"] .timeline::before, [data-theme="editorial"] .timeline__progress, [data-theme="editorial"] .day__dot { display: none; }
+[data-theme="editorial"] .day { grid-template-columns: 1fr; }
+[data-theme="editorial"] .day__card { border: 0; padding: 0; background: none; }
+[data-theme="editorial"] .day__head { border-bottom: 1px solid var(--ink); padding-bottom: 14px; margin-bottom: 40px; }
+[data-theme="editorial"] .day__label { font: italic 400 2.6rem/1 var(--font-head); letter-spacing: 0; text-transform: none; color: var(--orange-ink); }
+[data-theme="editorial"] .day__head h3 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+[data-theme="editorial"] .isteps { gap: 64px; }
+[data-theme="editorial"] .step { grid-template-columns: 1.3fr 1fr; gap: clamp(24px, 5vw, 56px); background: none; padding: 0; }
+[data-theme="editorial"] .step:nth-child(even) .step__media { order: 2; }
+[data-theme="editorial"] .step__media { aspect-ratio: 5/4; }
+[data-theme="editorial"] .step__time { font: 600 .72rem/1 var(--font-body); letter-spacing: .2em; }
+[data-theme="editorial"] .step__title { font: 400 clamp(1.5rem, 2.4vw, 2rem)/1.15 var(--font-head); }
+[data-theme="editorial"] .step__text { font-size: 1.04rem; }
+[data-theme="editorial"] .tag { border-color: var(--ink); text-transform: uppercase; letter-spacing: .08em; font-size: .68rem; background: none; }
+[data-theme="editorial"] .price-block { border: 1px solid var(--ink); }
+[data-theme="editorial"] .price-block__r { background: var(--ink); color: #fff; }
+[data-theme="editorial"] .price-block__r :is(.price-block__total, .price-block__total b, .book__per, .book__price small, .mini-trust, .field label) { color: #fff; }
+[data-theme="editorial"] .price-block__r .mini-trust svg { color: #FFB877; }
+[data-theme="editorial"] .book__price b { font: 400 3rem/1 var(--font-head); }
+[data-theme="editorial"] .price-block__r .btn--ghost { color: #fff; box-shadow: inset 0 0 0 1px #fff; }
+[data-theme="editorial"] .chip { background: none; border-color: var(--ink); }
+[data-theme="editorial"] .choice label:has(input:checked) { border-color: var(--ink); background: var(--orange-soft); }
+
+/* ================= PREMIUM MINIMALISTA ================= */
+[data-theme="premium"] {
+  --font-head: "Manrope", system-ui, sans-serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+  --bg: #F6F1EA; --sand: #EFE8DE; --ink: #1E1B18; --ink-2: #4A443E; --muted: #857B70; --line: #E2D9CE; --orange-soft: #F3E4D3; --orange-ink: #A34A00;
+  --shadow: none; --shadow-lg: 0 20px 50px -30px rgba(30,27,24,.35);
+}
+[data-theme="premium"] body { background: var(--bg); }
+[data-theme="premium"] :is(h1, h2, h3, h4) { font-weight: 300; letter-spacing: -.03em; }
+[data-theme="premium"] h1 { font-size: clamp(2.6rem, 6vw, 5rem); }
+[data-theme="premium"] :is(.trust-strip__card, .cat, .pkg, .why__media img, .review, .card, .cta-band, .gallery figure, .day__card, .acc, .summary, .trust-box, .choice label, .field input, .field select, .stepper, .modal__box, .review__photo, .pkg__tag, .chip, .source-chip, .step, .step__media, .price-block, .tag, .trust-item__icon, .why__badge, .trust-grid div, .book__card) { border-radius: 2px !important; }
+[data-theme="premium"] .btn { border-radius: 2px; font: 600 .74rem/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; box-shadow: none; }
+[data-theme="premium"] .nav a { font: 500 .74rem/1 var(--font-body); letter-spacing: .22em; text-transform: uppercase; }
+[data-theme="premium"] .nav a:hover, [data-theme="premium"] .nav a[aria-current="page"] { background: none; color: var(--orange-ink); }
+[data-theme="premium"] .header { background: rgba(246,241,234,.9); }
+[data-theme="premium"] .brand--logo img { border-radius: 50%; }
+[data-theme="premium"] .eyebrow { font: 500 .72rem/1 var(--font-body); letter-spacing: .24em; }
+[data-theme="premium"] .hero__content { margin-inline: auto; text-align: center; justify-items: center; }
+[data-theme="premium"] .hero__content .eyebrow::before { display: none; }
+[data-theme="premium"] .hero h1 em { color: #fff; font-weight: 500; }
+[data-theme="premium"] .hero__cta { justify-content: center; }
+[data-theme="premium"] .trust-strip { margin-top: 0; padding-top: 56px; }
+[data-theme="premium"] .trust-strip__card { background: transparent; box-shadow: none; border-block: 1px solid var(--line); border-radius: 0 !important; }
+[data-theme="premium"] .trust-item { flex-direction: column; text-align: center; align-items: center; }
+[data-theme="premium"] .trust-item__icon { background: none; }
+[data-theme="premium"] .trust-item b { font: 300 2rem/1 var(--font-head); }
+[data-theme="premium"] .section--sand { background: var(--sand); }
+[data-theme="premium"] .pkg { background: #FBF8F3; border-color: var(--line); }
+[data-theme="premium"] .pkg__price b { font-weight: 400; }
+[data-theme="premium"] .pkg__tag--sale { background: var(--ink); color: #fff; }
+[data-theme="premium"] .cat::after { background: linear-gradient(180deg, transparent 50%, rgba(30,27,24,.7)); }
+[data-theme="premium"] .cat h3 { font-weight: 400; }
+[data-theme="premium"] .why__badge { background: var(--ink); color: var(--bg); }
+[data-theme="premium"] .why__badge b { font-weight: 200; font-size: 3.4rem; }
+[data-theme="premium"] .review { background: #FBF8F3; }
+[data-theme="premium"] .card { background: #FBF8F3; }
+[data-theme="premium"] .card--ink, [data-theme="premium"] .cta-band { background: var(--ink); color: var(--bg); }
+[data-theme="premium"] .cta-band p { color: rgba(246,241,234,.75); }
+[data-theme="premium"] .cta-band .btn--dark { background: var(--orange); color: var(--ink); }
+[data-theme="premium"] .footer { background: var(--ink); }
+/* Itinerario premium: línea de tiempo del estilo actual, con acabado premium */
+[data-theme="premium"] .timeline::before { background: #D6CABB; width: 1px; }
+[data-theme="premium"] .timeline__progress { background: var(--orange-ink); width: 1px; }
+[data-theme="premium"] .day__dot { background: #FBF8F3; border: 1px solid #D6CABB; font: 300 1.05rem/1 var(--font-head); color: var(--muted); }
+[data-theme="premium"] .day.is-active .day__dot { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+[data-theme="premium"] .day__card { background: #FBF8F3; border: 1px solid var(--line); padding: 28px; }
+[data-theme="premium"] .day__label { font: 500 .7rem/1 var(--font-body); letter-spacing: .24em; color: var(--orange-ink); }
+[data-theme="premium"] .day__head h3 { font-weight: 300; font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
+[data-theme="premium"] .isteps { gap: 0; }
+[data-theme="premium"] .step { grid-template-columns: 260px 1fr; gap: 28px; background: none; padding: 20px 0; border-top: 1px solid var(--line); border-radius: 0 !important; }
+[data-theme="premium"] .step:first-child { border-top: 0; padding-top: 4px; }
+[data-theme="premium"] .step__media { aspect-ratio: 3/2; }
+[data-theme="premium"] .step__time { font: 500 .7rem/1 var(--font-body); letter-spacing: .24em; }
+[data-theme="premium"] .step__title { font: 400 1.3rem/1.3 var(--font-head); }
+[data-theme="premium"] .tag { background: none; border-color: #D6CABB; }
+[data-theme="premium"] .price-block { border-color: var(--line); box-shadow: none; }
+[data-theme="premium"] .price-block__l { background: #FBF8F3; }
+[data-theme="premium"] .price-block__r { background: var(--ink); color: var(--bg); }
+[data-theme="premium"] .price-block__r :is(.price-block__total, .price-block__total b, .book__per, .book__price small, .mini-trust, .field label) { color: var(--bg); }
+[data-theme="premium"] .price-block__r .mini-trust svg { color: #E9B98A; }
+[data-theme="premium"] .book__price b { font: 200 3.4rem/1 var(--font-head); }
+[data-theme="premium"] .price-block__r .btn--ghost { color: var(--bg); box-shadow: inset 0 0 0 1px rgba(246,241,234,.5); }
+[data-theme="premium"] .chip { background: #FBF8F3; }
+[data-theme="premium"] .summary, [data-theme="premium"] .trust-box { background: #FBF8F3; }
+
+/* ================= CÁLIDO ANDINO ================= */
+[data-theme="andino"] {
+  --font-head: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --bg: #FFF8F0; --sand: #FBEBDA; --ink: #2B1A12; --ink-2: #4E3428; --muted: #7D6253; --line: #EFD9C6; --orange-soft: #FDE6CC; --orange-ink: #A3471B;
+  --shadow: 0 18px 40px -24px rgba(120,60,20,.4); --shadow-lg: 0 30px 60px -28px rgba(120,60,20,.45);
+  --weave: linear-gradient(135deg, #FF7A00 25%, transparent 25%) -7px 0/14px 14px, linear-gradient(225deg, #A3471B 25%, transparent 25%) -7px 0/14px 14px, linear-gradient(315deg, #2E7D5B 25%, transparent 25%) 0 0/14px 14px, linear-gradient(45deg, #2B1A12 25%, #FFF8F0 25%) 0 0/14px 14px;
+}
+[data-theme="andino"] body { background: var(--bg); }
+[data-theme="andino"] :is(h1, h2, h3, h4) { font-weight: 800; }
+[data-theme="andino"] .btn { border-radius: 14px; }
+[data-theme="andino"] .header { background: rgba(255,248,240,.92); }
+[data-theme="andino"] .header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 6px; background: var(--weave); background-size: 12px 12px; opacity: .9; }
+[data-theme="andino"] .eyebrow::before { width: 18px; height: 8px; border-radius: 0; background: linear-gradient(90deg, #FF7A00 33%, #A3471B 33% 66%, #2E7D5B 66%); }
+[data-theme="andino"] .hero::after { background: linear-gradient(180deg, rgba(43,26,18,.15), rgba(43,26,18,.8)); }
+[data-theme="andino"] .hero h1 em { color: #FFB45C; font-style: italic; }
+[data-theme="andino"] .trust-item b { color: var(--orange-ink); }
+[data-theme="andino"] .trust-item__icon { background: var(--orange); color: var(--ink); border-radius: 50%; }
+[data-theme="andino"] .section--sand { background: var(--sand); position: relative; }
+[data-theme="andino"] .section--sand::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 14px; background: var(--weave); }
+[data-theme="andino"] .cat { border-radius: 120px 120px 22px 22px; }
+[data-theme="andino"] .pkg { border: 0; box-shadow: var(--shadow); }
+[data-theme="andino"] .pkg__tag { background: var(--ink); color: #FFF8F0; }
+[data-theme="andino"] .pkg__tag--sale { background: var(--orange); color: var(--ink); }
+[data-theme="andino"] .why__media img { border-radius: 200px 200px 24px 24px; }
+[data-theme="andino"] .review { border: 0; box-shadow: var(--shadow); }
+[data-theme="andino"] .card--ink { background: var(--ink); }
+[data-theme="andino"] .cta-band { background: var(--orange); }
+[data-theme="andino"] .cta-band::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--weave); }
+[data-theme="andino"] .footer { background: var(--ink); position: relative; }
+[data-theme="andino"] .footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 14px; background: var(--weave); }
+[data-theme="andino"] .chip { background: #fff; }
+/* Itinerario andino: fotos redondas unidas por una línea punteada */
+[data-theme="andino"] .timeline::before, [data-theme="andino"] .timeline__progress { display: none; }
+[data-theme="andino"] .day__dot { background: var(--orange); border-color: var(--orange); border-radius: 14px; }
+[data-theme="andino"] .day__card { background: none; border: 0; padding: 0; }
+[data-theme="andino"] .day__head { background: #fff; border-radius: 18px; padding: 16px 20px; box-shadow: var(--shadow); }
+[data-theme="andino"] .isteps::before { content: ""; position: absolute; left: 89px; top: 30px; bottom: 30px; width: 3px; background: repeating-linear-gradient(180deg, #FF7A00 0 10px, transparent 10px 18px); }
+[data-theme="andino"] .step { grid-template-columns: 180px 1fr; background: none; padding: 0; gap: 24px; }
+[data-theme="andino"] .step__media { aspect-ratio: 1/1; border-radius: 50% !important; border: 5px solid #fff; box-shadow: 0 0 0 3px var(--orange); z-index: 1; }
+[data-theme="andino"] .step__body { background: #fff; border-radius: 18px; padding: 18px 20px; box-shadow: var(--shadow); }
+[data-theme="andino"] .tag { background: var(--sand); border: 0; color: #7A3410; }
+[data-theme="andino"] .price-block { border: 0; }
+[data-theme="andino"] .price-block__r { background: var(--ink); color: #FFF8F0; position: relative; }
+[data-theme="andino"] .price-block__r::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 12px; background: var(--weave); }
+[data-theme="andino"] .price-block__r :is(.price-block__total, .price-block__total b, .book__per, .book__price small, .mini-trust, .field label) { color: #FFF8F0; }
+[data-theme="andino"] .price-block__r .mini-trust svg { color: #FFB45C; }
+[data-theme="andino"] .price-block__r .btn--ghost { color: #FFF8F0; box-shadow: inset 0 0 0 1.5px rgba(255,248,240,.5); }
+[data-theme="andino"] .book__price b { color: #FFB45C; }
+@media (max-width: 700px) {
+  [data-theme="andino"] .isteps::before { display: none; }
+  [data-theme="andino"] .step__media { width: 150px; justify-self: center; }
+  [data-theme="editorial"] .step, [data-theme="premium"] .step { grid-template-columns: 1fr; }
+}
