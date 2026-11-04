@@ -34,3 +34,14 @@ La web estática (raíz de este repo) reenvía `/armador/*` a
 está fuera del sitio estático (`.vercelignore`) y se publica aparte:
 
     cd armador && npx vercel deploy --prod
+
+## Armador v2 (quiz funnel nuevo)
+
+- Scoring: `src/lib/scoring/v2.ts` (puro, con tests). `npm test` corre todos los tests.
+- Lógica de endpoints: `src/lib/leads/servicio.ts`; rutas en `src/app/api/` (con el basePath quedan en `/armador/api/...`):
+  `score-parcial`, `lead`, `lead/[id]/wa-click`, `webhooks/resend`, `cron/mails`.
+- Base de datos: correr una vez `supabase/migraciones/001_leads_v2.sql` en Supabase → SQL Editor
+  (solo agrega las tablas `lead`, `evento`, `mail_cola` e `intento_ip`, con RLS y sin políticas).
+- Tiempos de la secuencia de mails: `src/lib/correo/secuencia.ts`.
+- CRM: interfaz `CrmSink` en `src/lib/crm/sink.ts` (hoy no hace nada).
+- Variables de entorno: `.env.example`.
