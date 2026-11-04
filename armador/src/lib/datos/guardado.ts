@@ -4,21 +4,12 @@ import type { DiaFijo, Estilo, Itinerario, Respuestas } from "@/lib/motor";
 import type { Json, TablesInsert } from "@/lib/supabase/database.types";
 import type { Adjunto } from "./adjunto";
 import type { Referencias } from "./referencias";
-import type { Nivel, Ocasion, Presupuesto, Score, Vuelos } from "@/lib/score";
 
-/** Lo que agrega el quiz del armador (no existe en itinerarios viejos). */
-export interface Perfil {
-  presupuesto: Presupuesto;
-  ocasion: Ocasion;
-  vuelos: Vuelos;
-  cuenta: string;
-  contacto: { nombre: string; email: string; ig: string };
-  score: Score;
-  /** Ids de Resend de la secuencia, para cancelarla si escribe por WhatsApp. */
-  correos?: { n: number; id: string; para: string }[];
-  prueba?: boolean;
-}
-export type { Nivel };
+/**
+ * Itinerarios del armador v1 (antes del quiz v2) guardaban acá filtro, contacto y score.
+ * Ya no se escribe: los leads v2 viven en la tabla `lead`. Se conserva para leer filas viejas.
+ */
+export type Perfil = Record<string, unknown>;
 
 export type FuenteCatalogo = "supabase" | "prueba";
 

@@ -172,52 +172,80 @@
       "boton": "Armar mi viaje"
     }
   },
-  "armar": {
+  "quiz": {
     "metaTitulo": "Arma tu viaje · Luna Llena Travel",
-    "pasos": [
-      "Días",
-      "Destinos",
-      "Estilo",
-      "Viajeros",
-      "Tu viaje",
-      "Cuéntanos",
-      "Recibir"
-    ],
-    "pasoDe": "Paso {n} de {total}",
     "catalogoPrueba": "Versión de prueba: los itinerarios usan un catálogo provisorio mientras la agencia revisa experiencias y precios.",
-    "dias": {
-      "titulo": "¿Cuántos días tienes?",
-      "lead": "Cuenta desde que llegas hasta que te vas. Con 7 a 10 días se recorren bien Cusco y Machu Picchu.",
-      "menos": "Quitar un día",
-      "mas": "Sumar un día",
-      "unidad": "{n, plural, one {día} other {días}}",
-      "mes": "¿En qué mes viajas?",
-      "mesAyuda": "Aproximado: lo usamos para revisar lluvias y cierres.",
-      "lluvias": "Lluvias"
-    },
-    "destinos": {
-      "titulo": "¿Qué quieres conocer?",
-      "lead": "Elige uno o más. Nosotros ordenamos la ruta por altura para que te aclimates.",
-      "base": "Si eliges Machu Picchu o el Valle Sagrado, sumamos Cusco como base.",
-      "altitud": "{m} m",
-      "minimo": "Elige al menos un destino."
-    },
-    "estilo": {
-      "titulo": "¿Cómo te gusta viajar?",
-      "lead": "Elegimos las experiencias de cada día según tu estilo."
-    },
+    "progreso": "Paso {n} de {total}",
+    "atras": "Atrás",
+    "siguiente": "Siguiente",
     "viajeros": {
       "titulo": "¿Cuántos viajan?",
-      "lead": "Con esto calculamos el precio desde por persona.",
-      "viajeros": "Viajeros",
-      "menos": "Quitar un viajero",
-      "mas": "Sumar un viajero",
-      "hotel": "¿Qué hotel prefieren?"
+      "lead": "Contándote a ti.",
+      "opciones": {
+        "1": "Solo yo",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6 o más"
+      }
     },
-    "nav": {
-      "atras": "Atrás",
-      "siguiente": "Siguiente",
-      "armar": "Recibir mi itinerario"
+    "experiencias": {
+      "titulo": "¿Qué quieres vivir?",
+      "lead": "Elige todo lo que te tienta. Nosotros ordenamos la ruta por altura.",
+      "elegidas": "{n, plural, =0 {Elige al menos una} one {# elegida} other {# elegidas}}"
+    },
+    "cuando": {
+      "titulo": "¿Cuándo viajas?",
+      "lead": "Aproximado: lo usamos para revisar lluvias y cierres.",
+      "lluvias": "Lluvias",
+      "fechas": "¿Qué tan fijas son tus fechas?",
+      "flexibilidad": {
+        "fijas": "Fechas fijas",
+        "aproximadas": "Aproximadas",
+        "flexible": "Soy flexible"
+      }
+    },
+    "dias": {
+      "titulo": "¿Cuántos días tienes?",
+      "lead": "Contando desde que llegas hasta que te vas. Con 7 a 10 días se recorren bien Cusco y Machu Picchu.",
+      "opciones": {
+        "4-5": "4 a 5 días",
+        "6-7": "6 a 7 días",
+        "8-10": "8 a 10 días",
+        "11+": "11 días o más"
+      }
+    },
+    "hotel": {
+      "titulo": "¿Qué tipo de hotel prefieres?",
+      "lead": "Lo usamos para calcular el precio desde."
+    },
+    "presupuesto": {
+      "titulo": "¿Cuánto piensas invertir por persona?",
+      "lead": "Sin contar los vuelos internacionales. Con esto ajustamos hoteles y experiencias.",
+      "opciones": {
+        "lt500": "Menos de USD 500",
+        "500-1000": "USD 500 a 1.000",
+        "1000-1500": "USD 1.000 a 1.500",
+        "1500-2500": "USD 1.500 a 2.500",
+        "gt2500": "Más de USD 2.500",
+        "nose": "Todavía no lo sé"
+      }
+    },
+    "etapa": {
+      "titulo": "¿En qué etapa estás?",
+      "lead": "Así sabemos cómo ayudarte mejor.",
+      "opciones": {
+        "listo": "Listo para reservar",
+        "comparando": "Comparando agencias",
+        "mirando": "Solo mirando"
+      },
+      "vuelos": "¿Ya tienes los vuelos a Perú?",
+      "vuelosOpciones": {
+        "comprados": "Ya comprados",
+        "cotizando": "Cotizando",
+        "no": "Todavía no"
+      }
     },
     "armando": {
       "titulo": "Armando tu viaje…",
@@ -225,70 +253,41 @@
         "Revisando temporada y cierres",
         "Ordenando la ruta por altura",
         "Repartiendo los días",
-        "Calculando el precio desde",
-        "Preparando tu mail"
+        "Calculando el precio desde"
       ]
     },
-    "error": "No pudimos guardar tu viaje. Revisa tus datos e intenta de nuevo.",
-    "progreso": "Progreso",
-    "presupuesto": {
-      "titulo": "¿Cuánto piensas invertir por persona?",
-      "lead": "Sin contar los vuelos internacionales. Con esto ajustamos hoteles y experiencias a lo que buscas.",
-      "opciones": {
-        "lt500": "Menos de USD 500",
-        "500-1000": "USD 500 – 1.000",
-        "1000-1500": "USD 1.000 – 1.500",
-        "1500-2500": "USD 1.500 – 2.500",
-        "gt2500": "Más de USD 2.500",
-        "nose": "Todavía no lo sé"
-      }
+    "puente": {
+      "titulo": "Una más y te mostramos tu viaje."
     },
-    "ocasion": {
-      "titulo": "¿Es un viaje especial?",
-      "opciones": {
-        "luna_miel": "Luna de miel",
-        "aniversario": "Aniversario o celebración",
-        "familia": "Viaje en familia",
-        "amigos": "Con amigos",
-        "solo": "Viajo solo o sola",
-        "otro": "Otro"
-      }
-    },
-    "vuelos": {
-      "titulo": "¿Ya tienes los vuelos a Perú?",
-      "opciones": {
-        "comprados": "Sí, ya los compré",
-        "cotizando": "Los estoy cotizando",
-        "no": "Todavía no"
-      }
-    },
-    "cuenta": {
-      "titulo": "Cuéntanos del viaje que tienes pensado",
-      "lead": "Opcional, pero nos ayuda mucho: qué te imaginas, con quién viajas, algo que no te quieres perder o algo que te preocupa.",
-      "placeholder": "Ej.: Es nuestra luna de miel, queremos Machu Picchu sin correr y un hotel lindo en el Valle. Mi pareja tiene un poco de miedo a la altura.",
-      "ayuda": "Mientras más nos cuentes, mejor ajustamos tu ruta.",
-      "caracteres": "{n} caracteres",
-      "omitir": "Prefiero no contar ahora"
-    },
-    "contacto": {
-      "titulo": "¿A dónde te mandamos tu itinerario?",
-      "lead": "Un asesor revisa tu ruta y te llega por mail en unos minutos, con el día por día y el precio desde.",
+    "datos": {
+      "titulo": "Tu viaje de {dias} días ya tiene ruta",
+      "lead": "Te mandamos el día por día completo y el precio desde. Un asesor revisa la ruta antes de enviarla.",
+      "ruta": "Ruta: {ruta}",
+      "precio": "Desde USD {precio} por persona",
+      "dia": "Día {n}",
+      "bloqueado": "{n, plural, one {# día más} other {# días más}} en tu itinerario completo",
+      "tipos": {
+        "traslado": "Traslado a {destino}",
+        "libre": "Día libre en {destino}",
+        "continuacion": "{experiencia} (continúa)",
+        "texto_libre": "{destino}",
+        "experiencia": "{experiencia}"
+      },
+      "formTitulo": "¿A dónde te lo mandamos?",
       "nombre": "Tu nombre",
       "email": "Tu mail",
-      "ig": "Tu usuario de Instagram (opcional)",
-      "privacidad": "Solo lo usamos para mandarte tu itinerario y algunos consejos para tu viaje. Nada de spam.",
-      "emailInvalido": "Revisa el mail: parece que le falta algo.",
-      "nombreFalta": "Escribe tu nombre."
-    },
-    "listo": {
-      "titulo": "¡Listo, {nombre}!",
-      "texto": "Estamos revisando tu ruta. En unos minutos te llega a {email} con el día por día y el precio desde.",
-      "spam": "Si no lo ves, revisa la carpeta de promociones o spam.",
-      "prueba": "Modo prueba: todavía no se mandan mails. Así lo vería la persona:",
-      "verItinerario": "Ver el itinerario",
-      "verCorreos": "Ver los 5 mails",
-      "nivel": "Score: {nivel}",
-      "otro": "Armar otro viaje"
+      "whatsapp": "Tu WhatsApp",
+      "pais": "Código de país",
+      "comentario": "¿Algo que debamos saber? (opcional)",
+      "comentarioAyuda": "Por ejemplo: con quién viajas, fechas, una celebración o una duda.",
+      "enviar": "Ver mi viaje completo",
+      "enviando": "Guardando…",
+      "privacidad": "Solo lo usamos para mandarte tu itinerario y ayudarte con tu viaje. Nada de spam.",
+      "nombreFalta": "Escribe tu nombre.",
+      "emailInvalido": "Revisa tu mail: parece incompleto.",
+      "whatsappInvalido": "Revisa el número y el código de país.",
+      "error": "No pudimos guardar tu viaje. Prueba de nuevo en un momento.",
+      "limite": "Recibimos varios intentos seguidos. Espera unos minutos y prueba de nuevo."
     },
     "autoridad": {
       "aria": "Por qué confiar en Luna Llena Travel",
@@ -311,6 +310,20 @@
       "cita": "El itinerario también fue cuidadosamente diseñado para ayudar con la aclimatación de altitud. La compañía es de propiedad local, y se nota.",
       "citaAutor": "Koyi K · Reseña en TripAdvisor, dic. 2025",
       "guias": "Te atienden nuestros 5 guías oficiales de turismo, en español e inglés."
+    },
+    "final": {
+      "calificado": {
+        "titulo": "¡Listo, {nombre}! Tu viaje está armado.",
+        "texto": "Por lo que nos contaste, podemos ayudarte a reservar ya. Un asesor en Cusco te responde por WhatsApp con disponibilidad real de trenes, entradas y hoteles.",
+        "boton": "Habla con un asesor ahora",
+        "mail": "También te mandamos el itinerario completo a {email}."
+      },
+      "no_calificado": {
+        "titulo": "Te mandamos tu itinerario al mail.",
+        "texto": "En unos minutos te llega a {email} el día por día completo y el precio desde."
+      },
+      "spam": "Si no lo ves, revisa promociones o spam.",
+      "otro": "Armar otro viaje"
     }
   }
 }

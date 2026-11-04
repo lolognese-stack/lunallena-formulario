@@ -5,10 +5,8 @@ import { Suspense } from "react";
 import { Avisos, LineaDeTiempo } from "@/components/itinerario/LineaDeTiempo";
 import { Boton } from "@/components/ui/Boton";
 import { Encabezado } from "@/components/ui/Encabezado";
-import { Icono, IconoWhatsApp, type NombreIcono } from "@/components/ui/Icono";
+import { Icono, type NombreIcono } from "@/components/ui/Icono";
 import { Pie } from "@/components/ui/Pie";
-import { BASE } from "@/lib/contacto";
-import { veWhatsapp } from "@/lib/score";
 import type { ItinerarioGuardado } from "@/lib/datos/guardado";
 import { leerItinerario } from "@/lib/datos/itinerarios";
 import { listaNatural, soles } from "@/lib/formato";
@@ -59,9 +57,6 @@ async function Itinerario({ guardado }: { guardado: ItinerarioGuardado }) {
   const nombres = itinerario.ruta.map((id) => referencias.destinos[id].nombre);
   // En el título cada destino va una vez, aunque se vuelva a él (Cusco → Machu Picchu → Cusco).
   const ruta = listaNatural([...new Set(nombres)], t("y"));
-  // El botón pasa por /wa/[slug]: anota el clic en el CRM y corta la secuencia de mails.
-  // Los leads fríos ven WhatsApp desde el día 8 (llega con el último mail).
-  const conWhatsapp = veWhatsapp(guardado.perfil?.score.categoria, guardado.creadoEn);
 
   const datos: { icono: NombreIcono; texto: string }[] = [
     { icono: "calendar", texto: (tc.raw("meses") as string[])[r.mes - 1] },
@@ -130,14 +125,6 @@ async function Itinerario({ guardado }: { guardado: ItinerarioGuardado }) {
             <p className="mt-2 text-[0.85rem] text-white/70">{t("precio.nota")}</p>
           </div>
           <div className="grid gap-2.5">
-            <Boton disabled bloque>
-              {t("acciones.cotizar")} · {t("acciones.proximamente")}
-            </Boton>
-            {conWhatsapp && (
-              <Boton href={`${BASE}/wa/${guardado.slug}/`} externo variante="claro" bloque>
-                <IconoWhatsApp /> {t("acciones.whatsapp")}
-              </Boton>
-            )}
             <Boton href="/" variante="claro" bloque>
               {t("acciones.otro")}
             </Boton>

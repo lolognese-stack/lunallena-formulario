@@ -35,5 +35,5 @@ export function Armando({ titulo, pasos }: { titulo: string; pasos: string[] }) 
 
 /** Espera mínima para que la pantalla "Armando…" se lea, aunque el servidor responda antes. */
 export const ESPERA_MINIMA_MS = 1800;
-export const conEsperaMinima = async <T,>(promesa: Promise<T>): Promise<T> =>
-  (await Promise.all([promesa, new Promise((r) => setTimeout(r, ESPERA_MINIMA_MS))]))[0];
+export const conEsperaMinima = async <T,>(promesa: Promise<T>, ms = ESPERA_MINIMA_MS): Promise<T> =>
+  (await Promise.all([promesa, new Promise((r) => setTimeout(r, ms))]))[0];

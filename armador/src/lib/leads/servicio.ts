@@ -12,6 +12,7 @@ import { cancelaMails, puedeAvanzar } from "./estado";
 import { nombresTarjetas, respuestasMotor } from "./experiencias";
 import type { RepoLeads } from "./repo";
 import type { Estado, Evento, Lead } from "./tipos";
+import { vistaPrevia, type VistaPrevia } from "./vista-previa";
 
 export interface ConfigLeads {
   /** Número de WhatsApp de la agencia, solo dígitos con código de país (ej. 51930299443). */
@@ -68,16 +69,17 @@ export function armarItinerario(r: Respuestas, deps: Pick<DepsLeads, "catalogo" 
 
 // ---------- POST /api/score-parcial ----------
 
-export type CuerpoParcial = { zonaGris: boolean; preguntas: PreguntaPuente[] } | { error: string };
+export type CuerpoParcial = { zonaGris: boolean; preguntas: PreguntaPuente[]; vistaPrevia: VistaPrevia } | { error: string };
 
 export function calcularParcial(entrada: unknown, deps: Pick<DepsLeads, "catalogo" | "config" | "ahora">): Respuesta<CuerpoParcial> {
   const v = esquemaScoreParcial.safeParse(entrada);
   if (!v.success) return { status: 400, body: { error: "invalido" } };
   const r = v.data.respuestas as Respuestas;
-  const { precioDesdeUsd } = armarItinerario(r, deps);
+  const { itinerario, precioDesdeUsd } = armarItinerario(r, deps);
   const p = scoreParcial(r, { hoy: deps.ahora(), precioDesdeUsd });
   // Solo lo que el front necesita: ni el puntaje ni el desglose salen del servidor.
-  return { status: 200, body: { zonaGris: p.zonaGris, preguntas: p.preguntas } };
+  // vistaPrevia (agregado a la spec) evita una segunda llamada para el paso 8.
+  return { status: 200, body: { zonaGris: p.zonaGris, preguntas: p.preguntas, vistaPrevia: vistaPrevia(itinerario, deps.catalogo, precioDesdeUsd) } };
 }
 
 // ---------- POST /api/lead ----------

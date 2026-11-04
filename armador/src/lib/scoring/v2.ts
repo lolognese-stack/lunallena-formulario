@@ -33,29 +33,11 @@ export const ZONA_GRIS = { desde: 40, hasta: 59 } as const;
 
 // ---------- Respuestas ----------
 
-export const VIAJEROS = [1, 2, 3, 4, 5, 6] as const; // 6 = "6+"
-export const DIAS = ["4-5", "6-7", "8-10", "11+"] as const;
-export const HOTELES = ["economico", "estandar", "superior"] as const;
-export const PRESUPUESTOS = ["lt500", "500-1000", "1000-1500", "1500-2500", "gt2500", "nose"] as const;
-export const ETAPAS = ["listo", "comparando", "mirando"] as const;
-export const VUELOS = ["comprados", "cotizando", "no"] as const;
-export const FLEXIBILIDAD = ["fijas", "aproximadas", "flexible"] as const;
-
-export type Viajeros = (typeof VIAJEROS)[number];
-export type RangoDias = (typeof DIAS)[number];
-export type Hotel = (typeof HOTELES)[number];
-export type Presupuesto = (typeof PRESUPUESTOS)[number];
-export type Etapa = (typeof ETAPAS)[number];
-export type Vuelos = (typeof VUELOS)[number];
-export type Flexibilidad = (typeof FLEXIBILIDAD)[number];
-
-export const PUENTE = {
-  precio: ["dentro", "alto", "lejos"],
-  reserva: ["este_mes", "1a3_meses", "nose"],
-  decide: ["solo_yo", "falta_alguien"],
-} as const;
-export type IdPuente = keyof typeof PUENTE;
-export type RespuestasPuente = { [K in IdPuente]?: (typeof PUENTE)[K][number] };
+export {
+  VIAJEROS, DIAS, HOTELES, PRESUPUESTOS, ETAPAS, VUELOS, FLEXIBILIDAD, PUENTE,
+  type Viajeros, type RangoDias, type Hotel, type Presupuesto, type Etapa, type Vuelos, type Flexibilidad, type IdPuente, type RespuestasPuente,
+} from "./opciones";
+import { PUENTE, type Etapa, type Flexibilidad, type Hotel, type IdPuente, type Presupuesto, type RangoDias, type RespuestasPuente, type Viajeros, type Vuelos } from "./opciones";
 
 export interface Respuestas {
   viajeros: Viajeros;

@@ -99,12 +99,21 @@ describe("POST /api/score-parcial", () => {
     expect(r.status).toBe(200);
     expect(r.body).toMatchObject({ zonaGris: true });
     expect((r.body as { preguntas: { id: string }[] }).preguntas.map((p) => p.id)).toEqual(["reserva"]);
-    expect(Object.keys(r.body).sort()).toEqual(["preguntas", "zonaGris"]);
+    expect(Object.keys(r.body).sort()).toEqual(["preguntas", "vistaPrevia", "zonaGris"]);
+    expect(JSON.stringify(r.body)).not.toMatch(/"total"|desglose|score/);
   });
 
   it("fuera de la zona gris: lista vacía", () => {
     const r = calcularParcial({ respuestas: CALIFICADO }, deps);
-    expect(r.body).toEqual({ zonaGris: false, preguntas: [] });
+    expect(r.body).toMatchObject({ zonaGris: false, preguntas: [] });
+  });
+
+  it("vista previa: 2 días con detalle, el resto solo número y destino", () => {
+    const v = (calcularParcial({ respuestas: CALIFICADO }, deps).body as unknown as { vistaPrevia: { totalDias: number; dias: Record<string, unknown>[] } }).vistaPrevia;
+    expect(v.totalDias).toBe(7);
+    expect(v.dias.filter((d) => d.visible).map((d) => d.numero)).toEqual([1, 2]);
+    expect(v.dias[0]).toHaveProperty("tipo");
+    for (const d of v.dias.slice(2)) expect(Object.keys(d).sort()).toEqual(["destino", "numero", "visible"]);
   });
 });
 

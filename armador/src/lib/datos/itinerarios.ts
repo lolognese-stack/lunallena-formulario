@@ -87,23 +87,3 @@ export async function leerItinerario(slug: string): Promise<ItinerarioGuardado |
   return data ? guardadoDesdeFila(data) : null;
 }
 
-/** Anota en answers.perfil los ids de Resend de la secuencia (para poder cancelarla). */
-export async function guardarCorreos(slug: string, correos: { n: number; id: string; para: string }[]) {
-  if (!FORMATO_SLUG.test(slug)) return;
-  const supabase = clienteServicio();
-  if (!supabase) {
-    const fila = memoria.get(slug);
-    if (fila) {
-      const a = fila.answers as { perfil?: Record<string, unknown> };
-      if (a.perfil) a.perfil.correos = correos;
-    }
-    return;
-  }
-  const { data, error } = await supabase.from("itineraries").select("answers").eq("share_slug", slug).maybeSingle();
-  if (error || !data) throw new Error(`No se pudo leer el itinerario ${slug}: ${error?.message ?? "no existe"}`);
-  const answers = data.answers as { perfil?: Record<string, unknown> };
-  if (!answers.perfil) return;
-  answers.perfil.correos = correos;
-  const { error: e2 } = await supabase.from("itineraries").update({ answers: answers as never }).eq("share_slug", slug);
-  if (e2) throw new Error(`No se pudieron guardar los correos de ${slug}: ${e2.message}`);
-}
