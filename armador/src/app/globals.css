@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/*
+  Tokens de marca copiados del estilo "actual" del prototipo
+  (https://lunallena-prototipo.vercel.app/assets/styles.css).
+  Uso: bg-orange, text-orange-ink, border-line, rounded-card, shadow-card, font-head…
+*/
+@theme {
+  --color-orange: #ff7a00;
+  --color-orange-hover: #ff8f26;
+  --color-orange-ink: #b34d00; /* naranja para texto sobre blanco (contraste 5.3:1) */
+  --color-orange-soft: #fff3e8;
+  --color-orange-pale: #ffd3ab; /* eyebrow sobre foto oscura */
+  --color-orange-light: #ffb877; /* eyebrow sobre fondo tinta */
+  --color-ink: #161616;
+  --color-ink-2: #3a3a3a;
+  --color-ink-hover: #2c2c2c;
+  --color-muted: #5e5e5e;
+  --color-line: #ece6e0;
+  --color-sand: #fbf8f5;
+  --color-ok: #1e7b46;
+  --color-error: #b42318;
+  --color-warn-bg: #fff8db;
+  --color-warn-line: #e9c94a;
+  --color-warn-ink: #7a5b00;
+  --color-whatsapp: #25d366;
+
+  --radius-sm: 12px;
+  --radius-card: 18px;
+  --radius-panel: 24px;
+  --radius-band: 28px;
+
+  --shadow-card: 0 1px 2px rgba(22, 22, 22, 0.04), 0 12px 32px -12px rgba(22, 22, 22, 0.18);
+  --shadow-float: 0 30px 60px -24px rgba(22, 22, 22, 0.35);
+  --shadow-orange: 0 8px 20px -8px rgba(255, 122, 0, 0.7);
+  --shadow-orange-hover: 0 12px 26px -10px rgba(255, 122, 0, 0.8);
+
+  --ease-marca: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --container-wrap: 1200px;
+}
+
+@theme inline {
+  --font-head: var(--font-jakarta), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font: 400 16px/1.6 var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-head);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+  h1 {
+    font-size: clamp(2.3rem, 5.4vw, 4.3rem);
+    font-weight: 800;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+    font-weight: 800;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@utility wrap {
+  width: min(100% - 32px, var(--container-wrap));
+  margin-inline: auto;
+}
+
+@utility section-y {
+  padding-block: clamp(64px, 10vw, 128px);
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 0.78rem/1 var(--font-head);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-orange-ink);
+  &::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--eyebrow-line, var(--color-orange));
+    border-radius: 2px;
+  }
+}
+
+@utility lead {
+  font-size: 1.125rem;
+  color: var(--color-muted);
+  max-width: 60ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

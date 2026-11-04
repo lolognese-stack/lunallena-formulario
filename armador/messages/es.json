@@ -1,0 +1,457 @@
+{
+  "metadata": {
+    "titulo": "Planificador de viajes · Luna Llena Travel",
+    "descripcion": "Arma tu viaje a Cusco, Machu Picchu y Perú con el planificador experto de Luna Llena Travel, agencia local en Cusco."
+  },
+  "marca": {
+    "nombre": "Luna Llena",
+    "sufijo": "TRAVEL",
+    "logoAlt": "Luna Llena Travel, inicio"
+  },
+  "encabezado": {
+    "navAria": "Principal",
+    "nav": {
+      "planificador": "Planificador",
+      "paquetes": "Paquetes",
+      "contacto": "Contacto"
+    },
+    "consultar": "Arma tu viaje",
+    "abrirMenu": "Abrir menú",
+    "cerrarMenu": "Cerrar menú"
+  },
+  "pie": {
+    "descripcion": "Agencia de viajes local en Cusco desde hace 8 años. Machu Picchu, Valle Sagrado, treks y paquetes por todo Perú.",
+    "viajes": {
+      "titulo": "Viajes",
+      "machuPicchu": "Machu Picchu",
+      "toursCusco": "Tours en Cusco",
+      "treks": "Treks alternativos",
+      "paquetesPeru": "Paquetes por Perú",
+      "retiros": "Retiros de sanación"
+    },
+    "oficinas": {
+      "titulo": "Oficinas",
+      "cusco": "Calle Chihuampata 543, San Blas, Cusco",
+      "francia": "2 Square de Monte Cristo, Marly-le-Roi 78160, Francia"
+    },
+    "contacto": {
+      "titulo": "Contacto",
+      "whatsapp": "WhatsApp +51 930 299 443",
+      "telefono": "+51 984 228 502",
+      "francia": "Francia +33 78 30 49 54",
+      "reservas": "reservas@lunallenatravel.com",
+      "info": "info@lunallenatravel.com"
+    },
+    "legal": "© 2026 Full Moon Travel Agency E.I.R.L. · RUC 20603319428",
+    "legalLinks": "Términos y condiciones · Política de cancelación · Libro de reclamaciones",
+    "whatsappFlotante": "Escríbenos por WhatsApp"
+  },
+  "whatsapp": {
+    "general": "Hola Luna Llena, quiero información sobre un viaje",
+    "armarViaje": "Hola Luna Llena, quiero armar mi viaje a Cusco"
+  },
+  "inicio": {
+    "heroAlt": "Vista de la ciudadela de Machu Picchu entre montañas",
+    "eyebrow": "Planificador experto de Cusco",
+    "titulo": "Arma tu viaje a Cusco con quien <em>vive aquí</em>",
+    "lead": "Cuéntanos cuántos días tienes y qué te gusta. Ordenamos la ruta por altura, respetamos la aclimatación y te damos un precio desde para cotizar con nuestro equipo.",
+    "ctaPrincipal": "Arma tu viaje",
+    "ctaWhatsapp": "Hablar por WhatsApp",
+    "confianza": {
+      "aria": "Por qué confiar en nosotros",
+      "anios": {
+        "titulo": "8 años",
+        "texto": "organizando viajes en Cusco y Perú"
+      },
+      "formal": {
+        "titulo": "Agencia formal",
+        "texto": "Full Moon Travel Agency E.I.R.L. · RUC 20603319428"
+      },
+      "oficinas": {
+        "titulo": "2 oficinas",
+        "texto": "San Blas, Cusco y Marly-le-Roi, Francia"
+      },
+      "respuesta": {
+        "titulo": "Cierre humano",
+        "texto": "Te respondemos con disponibilidad real de trenes y entradas"
+      }
+    },
+    "caminos": {
+      "eyebrow": "Elige cómo empezar",
+      "titulo": "Tres caminos para armar tu viaje",
+      "lead": "Trae tu itinerario, completa uno a medias o deja que lo armemos desde cero. En todos los casos terminas con un itinerario editable y un precio desde.",
+      "cargar": {
+        "titulo": "Ya tengo mi itinerario",
+        "texto": "Cárgalo día por día o adjunta tu PDF y te lo cotizamos tal cual."
+      },
+      "parte": {
+        "titulo": "Tengo una parte",
+        "texto": "Carga los días que ya tienes y completamos los que faltan."
+      },
+      "armar": {
+        "titulo": "Ármalo por mí",
+        "texto": "Días, destinos, estilo y presupuesto. Te proponemos la ruta completa."
+      },
+      "empezar": "Empezar"
+    },
+    "cta": {
+      "titulo": "¿Lo armamos contigo?",
+      "texto": "Responde unas preguntas y un asesor te manda tu itinerario por mail, con el día por día y el precio desde.",
+      "boton": "Armar mi viaje"
+    }
+  },
+  "motor": {
+    "porQue": {
+      "fijo": "Lo cargaste tú",
+      "traslado": "Día de viaje de {desde} a {hasta} en {modo, select, bus {bus} tren {tren} vuelo {avión} other {traslado}}{horas, plural, =0 {} other { (unas # h)}}",
+      "continuacion": "Día {dia} de {total} de {experiencia}",
+      "libre": "Día libre para recorrer {destino} a tu ritmo",
+      "libre_aclimatacion": "Día libre para aclimatarte a la altura de {destino}",
+      "aclimatacion_llegada": "Día suave para aclimatarte a la altura de {destino}",
+      "aclimatacion": "Otro día tranquilo: la altura se siente los primeros días",
+      "trek_aclimatado": "Ya aclimatado, listo para el trek",
+      "icono": "Lo imperdible de {destino}",
+      "estilo": "Va con tu viaje {estilo, select, clasico {clásico} aventura {de aventura} mistico {místico} relax {relajado} other {}}",
+      "recomendado": "Encaja bien en este punto de la ruta"
+    },
+    "avisos": {
+      "base_agregada": "Sumamos {destino} como base: desde ahí salen el tren y los tours.",
+      "destino_quitado": "Con {dias} días no llegamos a {destino} y lo dejamos fuera. Si quieres incluirlo, suma días.",
+      "aclimatacion": "{destino} está a más de 3.000 m: los primeros días son suaves para que te aclimates.",
+      "lluvias": "Viajas en temporada de lluvias ({mes, select, 1 {enero} 2 {febrero} 3 {marzo} 11 {noviembre} 12 {diciembre} other {}}): lleva impermeable; algunas salidas pueden cambiar por el clima.",
+      "sin_traslado": "Falta confirmar el traslado de {desde} a {hasta}; lo resolvemos en la cotización.",
+      "precio_hotel_pendiente": "El hotel en {destino} no está en el precio desde; lo confirmamos en la cotización.",
+      "precio_parcial": "Los días que escribiste a mano no suman al precio desde; los cotizamos aparte.",
+      "dia_fijo_invalido": "No pudimos usar lo que cargaste para el día {dia}; lo dejamos libre.",
+      "fijo_cerrado": "{experiencia} suele estar cerrado en {mes, select, 1 {enero} 2 {febrero} 3 {marzo} 4 {abril} 5 {mayo} 6 {junio} 7 {julio} 8 {agosto} 9 {septiembre} 10 {octubre} 11 {noviembre} 12 {diciembre} other {ese mes}}: lo revisamos contigo en la cotización."
+    }
+  },
+  "prueba": {
+    "metaTitulo": "Prueba del motor · Luna Llena Travel",
+    "eyebrow": "Vista de prueba",
+    "titulo": "Así arma el planificador tu viaje",
+    "lead": "Cambia las opciones y mira cómo se reordena el itinerario día por día. Es una vista interna para probar las reglas antes de construir las pantallas finales.",
+    "nota": "Catálogo de prueba: los precios de Cusco, Valle Sagrado y Machu Picchu salen del sitio; las experiencias de costa, Arequipa y Puno son inventadas. Hoteles con precio de ejemplo.",
+    "form": {
+      "titulo": "Tu viaje",
+      "dias": "Días",
+      "menos": "Quitar un día",
+      "mas": "Sumar un día",
+      "mes": "Mes aproximado",
+      "destinos": "Destinos",
+      "destinosAyuda": "Elige uno o más",
+      "estilo": "Estilo",
+      "viajeros": "Viajeros",
+      "menosViajeros": "Quitar un viajero",
+      "masViajeros": "Sumar un viajero",
+      "hotel": "Hotel"
+    },
+    "resultado": {
+      "ruta": "Tu ruta",
+      "desde": "Desde",
+      "porPersona": "por persona",
+      "total": "{total} para {viajeros, plural, one {# viajero} other {# viajeros}}",
+      "desglose": "Experiencias {experiencias} + hoteles {hoteles}. Se confirma en la cotización."
+    }
+  },
+  "comun": {
+    "meses": [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre"
+    ],
+    "estilos": {
+      "clasico": {
+        "nombre": "Clásico y cultural",
+        "texto": "Historia, ruinas y ciudad"
+      },
+      "aventura": {
+        "nombre": "Aventura",
+        "texto": "Treks, montañas y lagunas"
+      },
+      "mistico": {
+        "nombre": "Místico y sanación",
+        "texto": "Ceremonias y lugares sagrados"
+      },
+      "relax": {
+        "nombre": "Relax y familiar",
+        "texto": "Ritmo tranquilo, ideal en familia"
+      }
+    },
+    "hoteles": {
+      "economico": {
+        "nombre": "Económico",
+        "texto": "Hostales y hoteles sencillos, limpios y bien ubicados"
+      },
+      "estandar": {
+        "nombre": "Estándar",
+        "texto": "Hoteles de 3 estrellas en zonas céntricas"
+      },
+      "superior": {
+        "nombre": "Superior",
+        "texto": "Hoteles de 4 estrellas y boutique"
+      }
+    }
+  },
+  "itinerario": {
+    "metaTitulo": "Tu viaje de {dias} días · Luna Llena Travel",
+    "eyebrow": {
+      "B": "Tu viaje armado",
+      "A": "Tu itinerario",
+      "mixto": "Tu viaje completado"
+    },
+    "titulo": "{dias} días por {ruta}",
+    "y": " y ",
+    "catalogoPrueba": "Itinerario de prueba: usa un catálogo provisorio mientras la agencia revisa experiencias y precios.",
+    "adjunto": "Este itinerario incluye un archivo adjunto: el equipo lo revisa al cotizar.",
+    "resumen": {
+      "mes": "{mes}",
+      "viajeros": "{n, plural, one {# viajero} other {# viajeros}}",
+      "hotel": "Hotel {hotel}"
+    },
+    "avisos": "Para tener en cuenta",
+    "precio": {
+      "titulo": "Tu ruta",
+      "desde": "Desde",
+      "porPersona": "por persona",
+      "total": "{total} para {viajeros, plural, one {# viajero} other {# viajeros}}",
+      "desglose": "Experiencias {experiencias} + hoteles {hoteles}",
+      "nota": "Es un precio desde. Nuestro equipo lo confirma con disponibilidad real de trenes, entradas y hoteles."
+    },
+    "acciones": {
+      "cotizar": "Pedir cotización",
+      "proximamente": "Próximamente",
+      "whatsapp": "Consultar por WhatsApp",
+      "otro": "Armar otro viaje"
+    },
+    "mensajeWhatsapp": "Hola Luna Llena, armé un viaje de {dias} días ({ruta}) en el planificador y quiero consultarlo: {link}",
+    "dia": {
+      "numero": "Día {numero}",
+      "traslado": "Día de viaje",
+      "libre": "Día libre",
+      "sigue": "Sigue: {experiencia}",
+      "dificultad": "{n, select, 1 {Muy fácil} 2 {Fácil} 3 {Moderada} 4 {Exigente} other {Muy exigente}}",
+      "duracionDias": "{n} días",
+      "alternativas": "Otras opciones para este día:"
+    },
+    "noEncontrado": {
+      "titulo": "No encontramos este itinerario",
+      "texto": "Puede que el link esté incompleto. Arma uno nuevo en un minuto.",
+      "boton": "Armar mi viaje"
+    }
+  },
+  "armar": {
+    "metaTitulo": "Arma tu viaje · Luna Llena Travel",
+    "pasos": [
+      "Días",
+      "Destinos",
+      "Estilo",
+      "Viajeros",
+      "Tu viaje",
+      "Cuéntanos",
+      "Recibir"
+    ],
+    "pasoDe": "Paso {n} de {total}",
+    "catalogoPrueba": "Versión de prueba: los itinerarios usan un catálogo provisorio mientras la agencia revisa experiencias y precios.",
+    "dias": {
+      "titulo": "¿Cuántos días tienes?",
+      "lead": "Cuenta desde que llegas hasta que te vas. Con 7 a 10 días se recorren bien Cusco y Machu Picchu.",
+      "menos": "Quitar un día",
+      "mas": "Sumar un día",
+      "unidad": "{n, plural, one {día} other {días}}",
+      "mes": "¿En qué mes viajas?",
+      "mesAyuda": "Aproximado: lo usamos para revisar lluvias y cierres.",
+      "lluvias": "Lluvias"
+    },
+    "destinos": {
+      "titulo": "¿Qué quieres conocer?",
+      "lead": "Elige uno o más. Nosotros ordenamos la ruta por altura para que te aclimates.",
+      "base": "Si eliges Machu Picchu o el Valle Sagrado, sumamos Cusco como base.",
+      "altitud": "{m} m",
+      "minimo": "Elige al menos un destino."
+    },
+    "estilo": {
+      "titulo": "¿Cómo te gusta viajar?",
+      "lead": "Elegimos las experiencias de cada día según tu estilo."
+    },
+    "viajeros": {
+      "titulo": "¿Cuántos viajan?",
+      "lead": "Con esto calculamos el precio desde por persona.",
+      "viajeros": "Viajeros",
+      "menos": "Quitar un viajero",
+      "mas": "Sumar un viajero",
+      "hotel": "¿Qué hotel prefieren?"
+    },
+    "nav": {
+      "atras": "Atrás",
+      "siguiente": "Siguiente",
+      "armar": "Recibir mi itinerario"
+    },
+    "armando": {
+      "titulo": "Armando tu viaje…",
+      "pasos": [
+        "Revisando temporada y cierres",
+        "Ordenando la ruta por altura",
+        "Repartiendo los días",
+        "Calculando el precio desde",
+        "Preparando tu mail"
+      ]
+    },
+    "error": "No pudimos guardar tu viaje. Revisa tus datos e intenta de nuevo.",
+    "progreso": "Progreso",
+    "presupuesto": {
+      "titulo": "¿Cuánto piensas invertir por persona?",
+      "lead": "Sin contar los vuelos internacionales. Con esto ajustamos hoteles y experiencias a lo que buscas.",
+      "opciones": {
+        "lt500": "Menos de USD 500",
+        "500-1000": "USD 500 – 1.000",
+        "1000-1500": "USD 1.000 – 1.500",
+        "1500-2500": "USD 1.500 – 2.500",
+        "gt2500": "Más de USD 2.500",
+        "nose": "Todavía no lo sé"
+      }
+    },
+    "ocasion": {
+      "titulo": "¿Es un viaje especial?",
+      "opciones": {
+        "luna_miel": "Luna de miel",
+        "aniversario": "Aniversario o celebración",
+        "familia": "Viaje en familia",
+        "amigos": "Con amigos",
+        "solo": "Viajo solo o sola",
+        "otro": "Otro"
+      }
+    },
+    "vuelos": {
+      "titulo": "¿Ya tienes los vuelos a Perú?",
+      "opciones": {
+        "comprados": "Sí, ya los compré",
+        "cotizando": "Los estoy cotizando",
+        "no": "Todavía no"
+      }
+    },
+    "cuenta": {
+      "titulo": "Cuéntanos del viaje que tienes pensado",
+      "lead": "Opcional, pero nos ayuda mucho: qué te imaginas, con quién viajas, algo que no te quieres perder o algo que te preocupa.",
+      "placeholder": "Ej.: Es nuestra luna de miel, queremos Machu Picchu sin correr y un hotel lindo en el Valle. Mi pareja tiene un poco de miedo a la altura.",
+      "ayuda": "Mientras más nos cuentes, mejor ajustamos tu ruta.",
+      "caracteres": "{n} caracteres",
+      "omitir": "Prefiero no contar ahora"
+    },
+    "contacto": {
+      "titulo": "¿A dónde te mandamos tu itinerario?",
+      "lead": "Un asesor revisa tu ruta y te llega por mail en unos minutos, con el día por día y el precio desde.",
+      "nombre": "Tu nombre",
+      "email": "Tu mail",
+      "ig": "Tu usuario de Instagram (opcional)",
+      "privacidad": "Solo lo usamos para mandarte tu itinerario y algunos consejos para tu viaje. Nada de spam.",
+      "emailInvalido": "Revisa el mail: parece que le falta algo.",
+      "nombreFalta": "Escribe tu nombre."
+    },
+    "listo": {
+      "titulo": "¡Listo, {nombre}!",
+      "texto": "Estamos revisando tu ruta. En unos minutos te llega a {email} con el día por día y el precio desde.",
+      "spam": "Si no lo ves, revisa la carpeta de promociones o spam.",
+      "prueba": "Modo prueba: todavía no se mandan mails. Así lo vería la persona:",
+      "verItinerario": "Ver el itinerario",
+      "verCorreos": "Ver los 5 mails",
+      "nivel": "Score: {nivel}",
+      "otro": "Armar otro viaje"
+    }
+  },
+  "cargar": {
+    "metaTitulo": "Carga tu itinerario · Luna Llena Travel",
+    "eyebrow": "Ya tengo mi itinerario",
+    "titulo": "Carga tu itinerario día por día",
+    "lead": "Elige del catálogo o escríbelo como lo tienes. Si te falta una parte, al final completamos los días que faltan.",
+    "dia": {
+      "uno": "Día {n}",
+      "varios": "Días {desde} a {hasta}",
+      "destino": "Destino",
+      "quitar": "Quitar el día {n}",
+      "pregunta": "¿Qué haces este día?",
+      "opciones": {
+        "experiencia": "Del catálogo",
+        "texto": "Escribirlo",
+        "libre": "Día libre"
+      },
+      "vacio": "Sin plan todavía. Si completas los días que faltan, lo armamos nosotros; si no, queda libre.",
+      "libre": "Día libre para descansar o recorrer a tu ritmo.",
+      "texto": "Qué haces este día",
+      "textoAyuda": "Ej.: llegada a Cusco y descanso en el hotel",
+      "buscar": "Busca una experiencia",
+      "buscarAyuda": "Nombre de la experiencia o del lugar",
+      "deDestino": "Experiencias en {destino}",
+      "resultados": "{n, plural, =0 {Sin resultados} one {# resultado} other {# resultados}}",
+      "sinResultados": "No la encontramos. Puedes escribirla con tus palabras.",
+      "dias": "{n, plural, one {# día} other {# días}}",
+      "desde": "desde {precio}",
+      "noEntra": "No entra: el viaje pasaría de 15 días",
+      "cambiar": "Cambiar"
+    },
+    "agregar": "Agregar día",
+    "maximo": "Llegaste al máximo de 15 días.",
+    "resumen": "{n, plural, one {# día cargado} other {# días cargados}}",
+    "datos": {
+      "titulo": "Datos del viaje",
+      "lead": "Con esto revisamos temporada y cierres, y calculamos el precio desde.",
+      "mes": "¿En qué mes viajas?",
+      "mesAyuda": "Aproximado: lo usamos para revisar lluvias y cierres.",
+      "viajeros": "Viajeros",
+      "hotel": "¿Qué hotel prefieren?"
+    },
+    "adjunto": {
+      "titulo": "¿Tienes tu itinerario en un archivo?",
+      "lead": "Adjúntalo y lo cotizamos tal cual. Solo lo ve el equipo de Luna Llena.",
+      "formatos": "PDF, JPG o PNG, hasta 10 MB",
+      "opcional": "Opcional",
+      "elegir": "Elegir archivo",
+      "subiendo": "Subiendo… {pct}%",
+      "listo": "Adjuntado",
+      "quitar": "Quitar archivo",
+      "errorTipo": "Solo aceptamos PDF, JPG o PNG.",
+      "errorTamano": "El archivo pesa más de 10 MB.",
+      "errorSubida": "No pudimos subir el archivo. Intenta de nuevo."
+    },
+    "acciones": {
+      "completar": "Completar días",
+      "ver": "Ver mi itinerario"
+    },
+    "errores": {
+      "mes": "Elige el mes del viaje.",
+      "vacio": "Carga al menos un día o adjunta tu itinerario.",
+      "subiendo": "Espera a que termine de subir el archivo.",
+      "adjunto": "No encontramos el archivo adjunto. Vuelve a adjuntarlo.",
+      "guardado": "No pudimos guardar tu itinerario. Intenta de nuevo o escríbenos por WhatsApp."
+    },
+    "completar": {
+      "titulo": "Completar los días que faltan",
+      "lead": "Cargaste {n, plural, one {# día} other {# días}}. Dinos cuánto dura todo el viaje y cómo te gusta viajar: armamos el resto respetando lo tuyo.",
+      "dias": "¿Cuántos días dura el viaje?",
+      "estilo": "¿Cómo te gusta viajar?",
+      "destinos": "¿Sumamos algún destino?",
+      "destinosAyuda": "Opcional. Si no eliges ninguno, seguimos donde termina lo que cargaste.",
+      "cerrar": "Cerrar",
+      "boton": "Completar mi viaje",
+      "sinLugar": "Ya cargaste 15 días: no queda lugar para completar."
+    },
+    "armando": {
+      "titulo": "Preparando tu itinerario…",
+      "pasos": [
+        "Revisando temporada y cierres",
+        "Revisando la aclimatación",
+        "Calculando el precio desde"
+      ]
+    },
+    "borrador": "Recuperamos lo que habías cargado en este navegador."
+  }
+}
