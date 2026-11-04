@@ -14,12 +14,8 @@
   ],
   "rewrites": [
     {
-      "source": "/armador",
-      "destination": "https://lunallena-planificador.vercel.app/armador"
-    },
-    {
-      "source": "/armador/:path*",
-      "destination": "https://lunallena-planificador.vercel.app/armador/:path*"
+      "source": "/armador/(.*)",
+      "destination": "https://lunallena-planificador.vercel.app/armador/$1"
     },
     {
       "source": "/api/evento-web/",
