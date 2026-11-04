@@ -3,14 +3,15 @@ import type { ComponentProps, ReactNode } from "react";
 
 export type VarianteBoton = "primario" | "oscuro" | "contorno" | "claro" | "whatsapp";
 
+// Como .btn del sitio (tema premium): mayúsculas espaciadas, 2px de radio y sin sombra.
 const BASE =
-  "inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-sm px-6 font-head text-[0.98rem] leading-none font-bold no-underline transition-[background,transform,box-shadow,color] duration-200 ease-marca active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-sm px-6 font-body text-[0.74rem] leading-none font-semibold tracking-[0.2em] uppercase max-[520px]:px-4 max-[520px]:tracking-[0.12em] no-underline transition-[background,transform,box-shadow,color] duration-200 ease-marca active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-60 [&>svg]:size-[18px]";
 
 const VARIANTES: Record<VarianteBoton, string> = {
-  primario: "bg-orange text-ink shadow-orange hover:bg-orange-hover hover:shadow-orange-hover",
+  primario: "bg-orange text-ink hover:bg-orange-hover",
   oscuro: "bg-ink text-white hover:bg-ink-hover",
-  contorno: "bg-transparent text-ink shadow-[inset_0_0_0_1.5px_var(--color-line)] hover:shadow-[inset_0_0_0_1.5px_var(--color-ink)]",
-  claro: "bg-white/14 text-white shadow-[inset_0_0_0_1.5px_rgba(255,255,255,.55)] backdrop-blur-[6px] hover:bg-white/24",
+  contorno: "bg-transparent text-ink shadow-[inset_0_0_0_1px_var(--color-ink)] hover:bg-ink hover:text-white",
+  claro: "bg-white/14 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,.5)] backdrop-blur-[6px] hover:bg-white/24",
   // Igual que "contorno" pero con el ícono en verde WhatsApp (encabezado del prototipo).
   whatsapp:
     "bg-transparent text-ink shadow-[inset_0_0_0_1.5px_var(--color-line)] hover:shadow-[inset_0_0_0_1.5px_var(--color-ink)] [&>svg]:text-[#1fa855]",

@@ -1,39 +1,44 @@
 @import "tailwindcss";
 
 /*
-  Tokens de marca copiados del estilo "actual" del prototipo
-  (https://lunallena-prototipo.vercel.app/assets/styles.css).
-  Uso: bg-orange, text-orange-ink, border-line, rounded-card, shadow-card, font-head…
+  Tokens de marca del sitio lunallenatravel.vercel.app (tema "premium" y sección
+  Paquetes: /assets/themes.css y /assets/v2.css): crema, dorado #8E6214, Manrope liviana,
+  esquinas de 2px y sin sombras.
+  Uso: bg-orange, text-orange-ink, border-gold, bg-card, border-line, rounded-card, font-head…
 */
 @theme {
   --color-orange: #ff7a00;
   --color-orange-hover: #ff8f26;
-  --color-orange-ink: #b34d00; /* naranja para texto sobre blanco (contraste 5.3:1) */
-  --color-orange-soft: #fff3e8;
+  --color-orange-ink: #8e6214; /* dorado de la sección Paquetes, para texto sobre crema (4.9:1) */
+  --color-orange-soft: #f1e6cf;
   --color-orange-pale: #ffd3ab; /* eyebrow sobre foto oscura */
   --color-orange-light: #ffb877; /* eyebrow sobre fondo tinta */
-  --color-ink: #161616;
-  --color-ink-2: #3a3a3a;
-  --color-ink-hover: #2c2c2c;
-  --color-muted: #5e5e5e;
-  --color-line: #ece6e0;
-  --color-sand: #fbf8f5;
+  --color-ink: #1e1b18;
+  --color-ink-2: #4a443e;
+  --color-ink-hover: #36302a;
+  --color-muted: #6f665c;
+  --color-line: #e2d9ce;
+  --color-sand: #efe8de;
+  --color-bg: #f5eedd; /* fondo crema de la sección Paquetes */
+  --color-card: #fbf8f3; /* tarjetas sobre crema */
+  --color-gold: #8e6214; /* acento: borde superior de tarjetas, progreso, elegidos */
+  --color-gold-dark: #6f4c0f;
   --color-ok: #1e7b46;
   --color-error: #b42318;
-  --color-warn-bg: #fff8db;
-  --color-warn-line: #e9c94a;
-  --color-warn-ink: #7a5b00;
+  --color-warn-bg: #efe4c9;
+  --color-warn-line: #c9a85e;
+  --color-warn-ink: #5e430d;
   --color-whatsapp: #25d366;
 
-  --radius-sm: 12px;
-  --radius-card: 18px;
-  --radius-panel: 24px;
-  --radius-band: 28px;
+  --radius-sm: 2px;
+  --radius-card: 2px;
+  --radius-panel: 2px;
+  --radius-band: 2px;
 
-  --shadow-card: 0 1px 2px rgba(22, 22, 22, 0.04), 0 12px 32px -12px rgba(22, 22, 22, 0.18);
-  --shadow-float: 0 30px 60px -24px rgba(22, 22, 22, 0.35);
-  --shadow-orange: 0 8px 20px -8px rgba(255, 122, 0, 0.7);
-  --shadow-orange-hover: 0 12px 26px -10px rgba(255, 122, 0, 0.8);
+  --shadow-card: none;
+  --shadow-float: 0 20px 50px -30px rgba(30, 27, 24, 0.35);
+  --shadow-orange: none;
+  --shadow-orange-hover: none;
 
   --ease-marca: cubic-bezier(0.22, 0.61, 0.36, 1);
 
@@ -41,9 +46,9 @@
 }
 
 @theme inline {
-  --font-head: var(--font-jakarta), system-ui, sans-serif;
-  --font-body: var(--font-inter), system-ui, sans-serif;
-  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-head: var(--font-manrope), system-ui, sans-serif;
+  --font-body: var(--font-manrope), system-ui, sans-serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
 }
 
 @layer base {
@@ -51,7 +56,7 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    background: #fff;
+    background: var(--color-bg);
     color: var(--color-ink);
     font: 400 16px/1.6 var(--font-body);
     -webkit-font-smoothing: antialiased;
@@ -62,24 +67,26 @@
   h4 {
     font-family: var(--font-head);
     line-height: 1.12;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
+    font-weight: 300;
   }
   h1 {
-    font-size: clamp(2.3rem, 5.4vw, 4.3rem);
-    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 4.6rem);
+    font-weight: 300;
+    line-height: 1;
   }
   h2 {
     font-size: clamp(1.8rem, 3.6vw, 2.8rem);
-    font-weight: 800;
+    font-weight: 300;
   }
   h3 {
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: 400;
   }
   :focus-visible {
     outline: 3px solid var(--color-ink);
     outline-offset: 3px;
-    border-radius: 6px;
+    border-radius: 2px;
   }
 }
 
@@ -96,17 +103,25 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font: 700 0.78rem/1 var(--font-head);
-  letter-spacing: 0.14em;
+  font: 500 0.72rem/1 var(--font-body);
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-orange-ink);
   &::before {
     content: "";
     width: 22px;
-    height: 2px;
-    background: var(--eyebrow-line, var(--color-orange));
-    border-radius: 2px;
+    height: 1px;
+    background: var(--eyebrow-line, currentColor);
+    border-radius: 0;
   }
+}
+
+/* Tarjeta de la sección Paquetes: fondo hueso, borde fino y filete dorado arriba. */
+@utility tarjeta-pkg {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-gold);
+  border-radius: 2px;
 }
 
 @utility lead {

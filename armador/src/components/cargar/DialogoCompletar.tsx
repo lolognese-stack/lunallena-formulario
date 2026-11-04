@@ -63,7 +63,7 @@ export function DialogoCompletar({
       ref={dialogo}
       onClose={onCerrar}
       aria-labelledby="completar-titulo"
-      className="m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-panel bg-white p-0 text-ink backdrop:bg-ink/55 min-[700px]:m-auto min-[700px]:max-w-[640px] min-[700px]:rounded-panel"
+      className="m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-panel bg-card p-0 text-ink backdrop:bg-ink/55 min-[700px]:m-auto min-[700px]:max-w-[640px] min-[700px]:rounded-panel"
     >
       <div className="flex max-h-[92dvh] flex-col">
         <div className="flex items-start justify-between gap-4 border-b border-line px-[clamp(18px,4vw,28px)] pt-5 pb-4">
@@ -86,7 +86,7 @@ export function DialogoCompletar({
               <section className="grid gap-3">
                 <h3 className="text-[1.05rem]">{t("dias")}</h3>
                 <Contador valor={diasValidos} min={minimo} max={MAX_DIAS_VIAJE} onCambio={setDias} menos={ta("menos")} mas={ta("mas")}>
-                  <b className="block font-head text-[2.4rem] leading-none font-extrabold">{diasValidos}</b>
+                  <b className="block font-head text-[2.4rem] leading-none font-light">{diasValidos}</b>
                   <span className="text-[0.9rem] text-muted">{ta("unidad", { n: diasValidos })}</span>
                 </Contador>
               </section>

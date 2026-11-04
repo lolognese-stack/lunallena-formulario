@@ -55,7 +55,7 @@ export function Adjuntar({ estado, onCambio }: { estado: EstadoAdjunto; onCambio
   return (
     <div className="grid gap-3">
       {estado?.estado === "listo" ? (
-        <div className="flex items-center gap-3 rounded-card border-[1.5px] border-orange bg-orange-soft p-3.5">
+        <div className="flex items-center gap-3 rounded-card border-[1.5px] border-gold bg-orange-soft p-3.5">
           <span className="grid size-10 shrink-0 place-items-center rounded-full bg-orange text-ink">
             <Icono nombre="check" className="size-5" />
           </span>
@@ -63,12 +63,12 @@ export function Adjuntar({ estado, onCambio }: { estado: EstadoAdjunto; onCambio
             <b className="font-head text-[0.95rem]">{t("listo")}</b>
             <small className="truncate text-[0.86rem] text-ink-2">{estado.adjunto.nombre}</small>
           </div>
-          <button type="button" onClick={() => onCambio(null)} aria-label={t("quitar")} className="grid size-10 cursor-pointer place-items-center rounded-full text-ink-2 hover:bg-white">
+          <button type="button" onClick={() => onCambio(null)} aria-label={t("quitar")} className="grid size-10 cursor-pointer place-items-center rounded-full text-ink-2 hover:bg-card">
             <Icono nombre="x" className="size-[18px]" />
           </button>
         </div>
       ) : estado?.estado === "subiendo" ? (
-        <div className="grid gap-2 rounded-card border-[1.5px] border-line bg-white p-4" role="status">
+        <div className="grid gap-2 rounded-card border-[1.5px] border-line bg-card p-4" role="status">
           <span className="truncate text-[0.9rem] font-semibold">{estado.nombre}</span>
           <div className="h-2 overflow-hidden rounded-full bg-line">
             <div className="h-full bg-orange transition-[width]" style={{ width: `${estado.pct}%` }} />
@@ -76,7 +76,7 @@ export function Adjuntar({ estado, onCambio }: { estado: EstadoAdjunto; onCambio
           <small className="text-[0.84rem] text-muted">{t("subiendo", { pct: estado.pct })}</small>
         </div>
       ) : (
-        <label className="grid cursor-pointer justify-items-center gap-2 rounded-card border-2 border-dashed border-line bg-white px-4 py-6 text-center transition-colors hover:border-orange has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink">
+        <label className="grid cursor-pointer justify-items-center gap-2 rounded-card border-2 border-dashed border-line bg-card px-4 py-6 text-center transition-colors hover:border-gold has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink">
           <input
             ref={entrada}
             type="file"
@@ -85,7 +85,7 @@ export function Adjuntar({ estado, onCambio }: { estado: EstadoAdjunto; onCambio
             onChange={(e) => elegir(e.target.files?.[0])}
           />
           <Icono nombre="upload" className="size-7 text-orange-ink" />
-          <span className="font-head font-bold">{t("elegir")}</span>
+          <span className="font-head font-medium">{t("elegir")}</span>
           <small className="text-[0.86rem] text-muted">{t("formatos")}</small>
         </label>
       )}

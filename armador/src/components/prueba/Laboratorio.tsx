@@ -19,14 +19,14 @@ const HOTELES: CategoriaHotel[] = ["economico", "estandar", "superior"];
 
 const destinos = new Map(catalogo.destinos.map((d) => [d.id, d]));
 
-const etiqueta = "font-head text-[0.85rem] font-bold text-ink";
+const etiqueta = "font-head text-[0.85rem] font-medium text-ink";
 const chip =
-  "inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-full border-[1.5px] border-line bg-white px-3.5 text-[0.9rem] font-semibold transition-colors hover:border-[#cfc6be] aria-pressed:border-orange aria-pressed:bg-orange-soft";
+  "inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-full border-[1.5px] border-line bg-card px-3.5 text-[0.9rem] font-semibold transition-colors hover:border-[#cfc6be] aria-pressed:border-gold aria-pressed:bg-orange-soft";
 
 function Contador({ valor, min, max, onCambio, menos, mas }: { valor: number; min: number; max: number; onCambio: (n: number) => void; menos: string; mas: string }) {
   const boton = "size-11 cursor-pointer text-[1.3rem] text-ink disabled:cursor-not-allowed disabled:text-[#c9c2bb]";
   return (
-    <div className="flex min-h-12 items-center rounded-sm border-[1.5px] border-line bg-white">
+    <div className="flex min-h-12 items-center rounded-sm border-[1.5px] border-line bg-card">
       <button type="button" className={boton} aria-label={menos} disabled={valor <= min} onClick={() => onCambio(valor - 1)}>
         −
       </button>
@@ -66,7 +66,7 @@ export function Laboratorio() {
     <div className="wrap grid items-start gap-[clamp(24px,4vw,48px)] min-[1000px]:grid-cols-[360px_minmax(0,1fr)]">
       {/* Formulario */}
       <form
-        className="grid gap-5 rounded-panel border border-line bg-white p-5 shadow-card min-[1000px]:sticky min-[1000px]:top-24"
+        className="grid gap-5 rounded-panel border border-line bg-card p-5 shadow-card min-[1000px]:sticky min-[1000px]:top-24"
         onSubmit={(e) => e.preventDefault()}
         aria-label={t("form.titulo")}
       >
@@ -82,7 +82,7 @@ export function Laboratorio() {
             <select
               value={mes}
               onChange={(e) => setMes(Number(e.target.value))}
-              className="min-h-12 rounded-sm border-[1.5px] border-line bg-white px-3 font-medium focus:border-ink focus:outline-none"
+              className="min-h-12 rounded-sm border-[1.5px] border-line bg-card px-3 font-medium focus:border-ink focus:outline-none"
             >
               {meses.map((nombre, i) => (
                 <option key={nombre} value={i + 1}>
@@ -116,7 +116,7 @@ export function Laboratorio() {
                 type="button"
                 aria-pressed={estilo === valor}
                 onClick={() => setEstilo(valor)}
-                className="grid cursor-pointer gap-1 rounded-card border-[1.5px] border-line bg-white p-3 text-left transition-colors hover:border-[#cfc6be] aria-pressed:border-orange aria-pressed:bg-orange-soft"
+                className="grid cursor-pointer gap-1 rounded-card border-[1.5px] border-line bg-card p-3 text-left transition-colors hover:border-[#cfc6be] aria-pressed:border-gold aria-pressed:bg-orange-soft"
               >
                 <Icono nombre={icono} className="size-5 text-orange-ink" />
                 <b className="font-head text-[0.92rem] leading-tight">{tc(`estilos.${valor}.nombre`)}</b>
@@ -136,7 +136,7 @@ export function Laboratorio() {
             <select
               value={hotel}
               onChange={(e) => setHotel(e.target.value as CategoriaHotel)}
-              className="min-h-12 rounded-sm border-[1.5px] border-line bg-white px-3 font-medium focus:border-ink focus:outline-none"
+              className="min-h-12 rounded-sm border-[1.5px] border-line bg-card px-3 font-medium focus:border-ink focus:outline-none"
             >
               {HOTELES.map((h) => (
                 <option key={h} value={h}>
@@ -153,7 +153,7 @@ export function Laboratorio() {
         <div className="grid gap-5 rounded-panel bg-ink p-[clamp(20px,3vw,32px)] text-white">
           <div className="grid gap-2">
             <span className="eyebrow text-orange-light [--eyebrow-line:var(--color-orange-light)]">{t("resultado.ruta")}</span>
-            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-head text-[1.25rem] font-extrabold">
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-head text-[1.25rem] font-light">
               {itinerario.ruta.map((id, i) => (
                 <span key={id} className="inline-flex items-center gap-2">
                   {i > 0 && <Icono nombre="arrow" className="size-4 text-orange" />}
@@ -165,7 +165,7 @@ export function Laboratorio() {
           <div className="flex flex-wrap items-end justify-between gap-4 border-t border-white/14 pt-5">
             <div>
               <small className="text-[0.85rem] text-white/70">{t("resultado.desde")}</small>
-              <b className="block font-head text-[2.2rem] leading-none font-extrabold">
+              <b className="block font-head text-[2.2rem] leading-none font-light">
                 {soles.format(precio.porPersona)} <span className="text-[1rem] font-semibold text-white/70">{t("resultado.porPersona")}</span>
               </b>
             </div>

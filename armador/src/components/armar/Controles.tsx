@@ -8,7 +8,7 @@ import type { CategoriaHotel, Estilo } from "@/lib/motor";
 
 /** Tarjeta elegible (meses, estilos, hoteles): se marca con `aria-pressed`. */
 export const claseOpcion =
-  "cursor-pointer rounded-card border-[1.5px] border-line bg-white text-left transition-[border-color,background,box-shadow] hover:border-[#cfc6be] aria-pressed:border-orange aria-pressed:bg-orange-soft aria-pressed:shadow-[0_0_0_1px_var(--color-orange)]";
+  "cursor-pointer rounded-card border-[1.5px] border-line bg-card text-left transition-[border-color,background,box-shadow] hover:border-[#cfc6be] aria-pressed:border-gold aria-pressed:bg-orange-soft aria-pressed:shadow-[0_0_0_1px_var(--color-gold)]";
 
 export const HOTELES: CategoriaHotel[] = ["economico", "estandar", "superior"];
 
@@ -20,7 +20,7 @@ export const ESTILOS: { valor: Estilo; icono: NombreIcono }[] = [
 ];
 
 export function Contador({ valor, min, max, onCambio, menos, mas, children }: { valor: number; min: number; max: number; onCambio: (n: number) => void; menos: string; mas: string; children: ReactNode }) {
-  const boton = "grid size-14 cursor-pointer place-items-center rounded-full border-[1.5px] border-line bg-white text-[1.6rem] text-ink transition-colors hover:border-ink disabled:cursor-not-allowed disabled:text-[#c9c2bb] disabled:hover:border-line";
+  const boton = "grid size-14 cursor-pointer place-items-center rounded-full border-[1.5px] border-line bg-card text-[1.6rem] text-ink transition-colors hover:border-ink disabled:cursor-not-allowed disabled:text-[#c9c2bb] disabled:hover:border-line";
   return (
     <div className="flex items-center gap-5">
       <button type="button" className={boton} aria-label={menos} disabled={valor <= min} onClick={() => onCambio(valor - 1)}>
@@ -72,7 +72,7 @@ export function SelectorEstilo({ estilo, onCambio }: { estilo: Estilo | null; on
     <div className="grid gap-3 min-[560px]:grid-cols-2">
       {ESTILOS.map(({ valor, icono }) => (
         <button key={valor} type="button" aria-pressed={estilo === valor} onClick={() => onCambio(valor)} className={`${claseOpcion} flex items-center gap-4 p-4`}>
-          <span className="grid size-12 shrink-0 place-items-center rounded-[14px] bg-orange-soft text-orange-ink">
+          <span className="grid size-12 shrink-0 place-items-center rounded-sm bg-orange-soft text-orange-ink">
             <Icono nombre={icono} className="size-6" />
           </span>
           <span className="grid gap-0.5">

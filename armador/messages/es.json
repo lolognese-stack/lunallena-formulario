@@ -11,11 +11,13 @@
   "encabezado": {
     "navAria": "Principal",
     "nav": {
-      "planificador": "Planificador",
+      "inicio": "Inicio",
       "paquetes": "Paquetes",
+      "planificador": "Arma tu viaje",
+      "nosotros": "Nosotros",
       "contacto": "Contacto"
     },
-    "consultar": "Arma tu viaje",
+    "consultar": "Empezar",
     "abrirMenu": "Abrir menú",
     "cerrarMenu": "Cerrar menú"
   },
@@ -98,7 +100,11 @@
       "titulo": "¿Lo armamos contigo?",
       "texto": "Responde unas preguntas y un asesor te manda tu itinerario por mail, con el día por día y el precio desde.",
       "boton": "Armar mi viaje"
-    }
+    },
+    "migasAria": "Estás en",
+    "migasInicio": "Inicio",
+    "migasActual": "Arma tu viaje",
+    "ctaCaminos": "Ver otras opciones"
   },
   "motor": {
     "porQue": {

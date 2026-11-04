@@ -201,7 +201,7 @@ export function Constructor({
           <p className="text-muted">{t("datos.lead")}</p>
         </div>
         <fieldset className="grid gap-3">
-          <legend className="mb-1 font-head text-[1.1rem] font-bold">{t("datos.mes")}</legend>
+          <legend className="mb-1 font-head text-[1.1rem] font-medium">{t("datos.mes")}</legend>
           <p className="-mt-2 text-[0.92rem] text-muted">{t("datos.mesAyuda")}</p>
           <SelectorMes
             mes={mes}
@@ -215,12 +215,12 @@ export function Constructor({
         <div className="grid gap-3">
           <h3 className="text-[1.1rem]">{t("datos.viajeros")}</h3>
           <Contador valor={viajeros} min={1} max={20} onCambio={setViajeros} menos={ta("viajeros.menos")} mas={ta("viajeros.mas")}>
-            <b className="block font-head text-[2.4rem] leading-none font-extrabold">{viajeros}</b>
+            <b className="block font-head text-[2.4rem] leading-none font-light">{viajeros}</b>
             <span className="text-[0.9rem] text-muted">{ta("viajeros.viajeros")}</span>
           </Contador>
         </div>
         <fieldset className="grid gap-3">
-          <legend className="mb-1 font-head text-[1.1rem] font-bold">{t("datos.hotel")}</legend>
+          <legend className="mb-1 font-head text-[1.1rem] font-medium">{t("datos.hotel")}</legend>
           <SelectorHotel hotel={hotel} onCambio={setHotel} />
         </fieldset>
       </section>
@@ -243,7 +243,7 @@ export function Constructor({
       </section>
 
       {/* Acciones fijas abajo */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-[rgba(246,241,234,.95)] pb-[env(safe-area-inset-bottom)] backdrop-blur">
         {error && (
           <p role="alert" className="wrap max-w-[860px] pt-3 text-[0.9rem] font-medium text-error">
             {t(`errores.${error}`)}

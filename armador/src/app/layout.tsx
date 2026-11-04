@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import "./globals.css";
 import { BASE } from "@/lib/contacto";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+// Misma tipografía que el sitio (tema premium): Manrope liviana en títulos y texto.
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["200", "300", "400", "500", "600", "700"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const locale = await getLocale();
   return (
-    <html lang={locale} className={`${jakarta.variable} ${inter.variable}`}>
+    <html lang={locale} className={manrope.variable}>
       <body className="flex min-h-dvh flex-col">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

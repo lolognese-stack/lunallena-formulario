@@ -105,7 +105,7 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
   if (listo) {
     return (
       <div className="wrap grid max-w-[640px] justify-items-start gap-5 py-16">
-        <span className="grid size-14 place-items-center rounded-full bg-orange text-ink"><Icono nombre="check" className="size-7" /></span>
+        <span className="grid size-14 place-items-center rounded-full bg-gold text-white"><Icono nombre="check" className="size-7" /></span>
         <h1 className="text-[clamp(1.9rem,4.4vw,2.8rem)]">{t("listo.titulo", { nombre: nombre.trim().split(" ")[0] })}</h1>
         <p className="lead">{t("listo.texto", { email: email.trim() })}</p>
         <p className="text-[0.92rem] text-muted">{t("listo.spam")}</p>
@@ -135,7 +135,7 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
             key={nombre}
             aria-current={paso === i + 1 ? "step" : undefined}
             className={`grid gap-2 text-[0.8rem] font-semibold before:h-1 before:rounded-full before:transition-colors before:duration-300 ${
-              i + 1 <= paso ? "text-ink before:bg-orange" : "text-muted before:bg-line"
+              i + 1 <= paso ? "text-ink before:bg-gold" : "text-muted before:bg-line"
             }`}
           >
             <span className="max-[480px]:sr-only">{nombre}</span>
@@ -149,11 +149,11 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
         <section className="mt-3 grid gap-8">
           <Encabezado titulo={t("dias.titulo")} lead={t("dias.lead")} refTitulo={titulo} />
           <Contador valor={dias} min={3} max={15} onCambio={setDias} menos={t("dias.menos")} mas={t("dias.mas")}>
-            <b className="block font-head text-[3rem] leading-none font-extrabold">{dias}</b>
+            <b className="block font-head text-[3rem] leading-none font-light">{dias}</b>
             <span className="text-[0.9rem] text-muted">{t("dias.unidad", { n: dias })}</span>
           </Contador>
           <fieldset className="grid gap-3">
-            <legend className="mb-1 font-head text-[1.15rem] font-bold">{t("dias.mes")}</legend>
+            <legend className="mb-1 font-head text-[1.15rem] font-medium">{t("dias.mes")}</legend>
             <p className="-mt-2 text-[0.92rem] text-muted">{t("dias.mesAyuda")}</p>
             <SelectorMes mes={mes} onCambio={setMes} />
           </fieldset>
@@ -173,24 +173,24 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
                   aria-pressed={elegido}
                   onClick={() => alternar(d.id)}
                   className={`group relative isolate flex aspect-[4/5] cursor-pointer flex-col justify-end overflow-hidden rounded-card p-3.5 text-left text-white outline-offset-4 transition-shadow ${
-                    elegido ? "shadow-[0_0_0_3px_var(--color-orange)]" : ""
+                    elegido ? "shadow-[0_0_0_3px_var(--color-gold)]" : ""
                   }`}
                 >
                   {d.imagenUrl ? (
                     <Image src={d.imagenUrl} alt="" fill sizes="(min-width: 800px) 220px, 50vw" className="-z-20 object-cover transition-transform duration-700 group-hover:scale-105" />
                   ) : (
-                    <span className="absolute inset-0 -z-20 bg-[linear-gradient(160deg,var(--color-orange),var(--color-orange-ink))]" />
+                    <span className="absolute inset-0 -z-20 bg-[linear-gradient(160deg,#b8935a,var(--color-gold-dark))]" />
                   )}
                   <span className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,transparent_35%,rgba(0,0,0,.75))]" />
                   <span
                     aria-hidden="true"
                     className={`absolute top-3 right-3 grid size-8 place-items-center rounded-full border-2 transition-colors ${
-                      elegido ? "border-orange bg-orange text-ink" : "border-white/80 bg-black/20"
+                      elegido ? "border-gold bg-gold text-white" : "border-white/80 bg-black/20"
                     }`}
                   >
                     {elegido && <Icono nombre="check" className="size-4" />}
                   </span>
-                  <b className="font-head text-[1.08rem] leading-tight">{d.nombre}</b>
+                  <b className="font-head text-[1.08rem] leading-tight font-medium">{d.nombre}</b>
                   <small className="mt-0.5 text-[0.8rem] opacity-85">{t("destinos.altitud", { m: d.altitudM.toLocaleString("es-PE") })}</small>
                 </button>
               );
@@ -213,11 +213,11 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
         <section className="mt-3 grid gap-8">
           <Encabezado titulo={t("viajeros.titulo")} lead={t("viajeros.lead")} refTitulo={titulo} />
           <Contador valor={viajeros} min={1} max={20} onCambio={setViajeros} menos={t("viajeros.menos")} mas={t("viajeros.mas")}>
-            <b className="block font-head text-[3rem] leading-none font-extrabold">{viajeros}</b>
+            <b className="block font-head text-[3rem] leading-none font-light">{viajeros}</b>
             <span className="text-[0.9rem] text-muted">{t("viajeros.viajeros")}</span>
           </Contador>
           <fieldset className="grid gap-3">
-            <legend className="mb-1 font-head text-[1.15rem] font-bold">{t("viajeros.hotel")}</legend>
+            <legend className="mb-1 font-head text-[1.15rem] font-medium">{t("viajeros.hotel")}</legend>
             <SelectorHotel hotel={hotel} onCambio={setHotel} />
           </fieldset>
         </section>
@@ -228,11 +228,11 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
           <Encabezado titulo={t("presupuesto.titulo")} lead={t("presupuesto.lead")} refTitulo={titulo} />
           <Opciones valores={PRESUPUESTOS} elegido={presupuesto} onCambio={setPresupuesto} etiqueta={(v) => t(`presupuesto.opciones.${v}`)} columnas="min-[560px]:grid-cols-3" />
           <fieldset className="grid gap-3">
-            <legend className="mb-1 font-head text-[1.15rem] font-bold">{t("ocasion.titulo")}</legend>
+            <legend className="mb-1 font-head text-[1.15rem] font-medium">{t("ocasion.titulo")}</legend>
             <Opciones valores={OCASIONES} elegido={ocasion} onCambio={setOcasion} etiqueta={(v) => t(`ocasion.opciones.${v}`)} columnas="min-[560px]:grid-cols-3" />
           </fieldset>
           <fieldset className="grid gap-3">
-            <legend className="mb-1 font-head text-[1.15rem] font-bold">{t("vuelos.titulo")}</legend>
+            <legend className="mb-1 font-head text-[1.15rem] font-medium">{t("vuelos.titulo")}</legend>
             <Opciones valores={VUELOS} elegido={vuelos} onCambio={setVuelos} etiqueta={(v) => t(`vuelos.opciones.${v}`)} columnas="min-[560px]:grid-cols-3" />
           </fieldset>
         </section>
@@ -247,7 +247,7 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
             rows={6}
             placeholder={t("cuenta.placeholder")}
             aria-label={t("cuenta.titulo")}
-            className="w-full rounded-card border-[1.5px] border-line bg-white p-4 text-[1rem] leading-relaxed outline-none focus:border-orange"
+            className="w-full rounded-card border-[1.5px] border-line bg-card p-4 text-[1rem] leading-relaxed outline-none focus:border-gold"
           />
           <div className="flex flex-wrap items-center justify-between gap-2 text-[0.85rem] text-muted">
             <span>{t("cuenta.ayuda")}</span>
@@ -270,7 +270,7 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
       )}
 
       {/* Navegación fija abajo */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-[rgba(246,241,234,.95)] pb-[env(safe-area-inset-bottom)] backdrop-blur">
         {error && (
           <p role="alert" className="wrap max-w-[960px] pt-3 text-[0.9rem] font-medium text-error">
             {t("error")}
@@ -334,7 +334,7 @@ function Campo({ etiqueta, valor, onCambio, tipo = "text", autoComplete, error }
         autoComplete={autoComplete}
         onChange={(e) => onCambio(e.target.value)}
         aria-invalid={!!error}
-        className="h-13 rounded-sm border-[1.5px] border-line bg-white px-4 text-[1rem] outline-none focus:border-orange aria-invalid:border-error"
+        className="h-13 rounded-sm border-[1.5px] border-line bg-card px-4 text-[1rem] outline-none focus:border-gold aria-invalid:border-error"
       />
       {error && <span className="text-[0.85rem] text-error">{error}</span>}
     </label>

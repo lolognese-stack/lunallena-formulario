@@ -30,32 +30,32 @@ function Dia({ dia, referencias }: { dia: DiaItinerario; referencias: Referencia
     : dia.tipo === "continuacion" ? t("sigue", { experiencia: e!.nombre })
     : e!.nombre;
 
-  const etiqueta = "rounded-full border border-line bg-sand px-2.5 py-1 text-[0.78rem] font-semibold text-ink-2";
+  const etiqueta = "rounded-sm border border-[#d6cabb] bg-transparent px-2.5 py-1 text-[0.78rem] font-semibold text-ink-2";
 
   return (
     <li className="relative grid grid-cols-[36px_1fr] gap-3 min-[600px]:grid-cols-[48px_1fr] min-[600px]:gap-5">
       <span
         aria-hidden="true"
-        className={`relative z-1 grid size-9 place-items-center rounded-full border-2 font-head text-[0.8rem] font-extrabold min-[600px]:size-12 min-[600px]:text-[0.95rem] ${
-          compacto ? "border-line bg-white" : "border-orange bg-orange"
+        className={`relative z-1 grid size-9 place-items-center rounded-full border-2 font-head text-[0.8rem] font-light min-[600px]:size-12 min-[600px]:text-[0.95rem] ${
+          compacto ? "border-line bg-card" : "border-gold bg-gold text-white"
         }`}
       >
         {dia.numero}
       </span>
-      <article className={`overflow-hidden rounded-panel border border-line bg-white ${compacto ? "" : "shadow-card"}`}>
+      <article className={`overflow-hidden rounded-panel border border-line bg-card ${compacto ? "" : "shadow-card"}`}>
         {!compacto && (
           <div className="relative aspect-[16/7] bg-sand">
             {e?.imagenUrl ? (
               <Image src={e.imagenUrl} alt="" fill sizes="(min-width: 1000px) 640px, 100vw" className="object-cover" />
             ) : (
-              <div className="grid size-full place-items-center bg-[linear-gradient(135deg,var(--color-orange-soft),var(--color-sand))] font-head text-[1.4rem] font-extrabold text-orange-ink/60">
+              <div className="grid size-full place-items-center bg-[linear-gradient(135deg,var(--color-orange-soft),var(--color-sand))] font-head text-[1.4rem] font-light text-orange-ink/60">
                 {destino.nombre}
               </div>
             )}
           </div>
         )}
         <div className={`grid gap-2 ${compacto ? "px-5 py-4" : "p-5"}`}>
-          <span className="font-head text-[0.75rem] font-bold tracking-[0.12em] text-orange-ink uppercase">
+          <span className="font-head text-[0.75rem] font-medium tracking-[0.12em] text-orange-ink uppercase">
             {t("numero", { numero: dia.numero })} · {destino.nombre}
           </span>
           <h3 className={compacto ? "text-[1.02rem]" : "text-[1.2rem]"}>{titulo}</h3>

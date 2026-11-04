@@ -3,7 +3,7 @@ import type { ComponentProps } from "react";
 export type VarianteTarjeta = "blanca" | "tinta" | "naranja" | "arena";
 
 const VARIANTES: Record<VarianteTarjeta, string> = {
-  blanca: "bg-white border border-line",
+  blanca: "tarjeta-pkg",
   tinta: "bg-ink text-white",
   naranja: "bg-orange text-ink",
   arena: "bg-sand border border-line",
@@ -11,7 +11,7 @@ const VARIANTES: Record<VarianteTarjeta, string> = {
 
 type Props = ComponentProps<"div"> & {
   variante?: VarianteTarjeta;
-  /** Sombra suave del prototipo (tarjetas flotantes, resumen). */
+  /** Sombra suave (tarjetas flotantes, resumen). */
   elevada?: boolean;
   /** Sin relleno interno, para tarjetas con foto a sangre. */
   sinRelleno?: boolean;

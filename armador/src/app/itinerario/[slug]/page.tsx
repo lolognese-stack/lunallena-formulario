@@ -78,13 +78,13 @@ async function Itinerario({ guardado }: { guardado: ItinerarioGuardado }) {
           <h1 className="max-w-[22ch] text-[clamp(1.9rem,4.4vw,3.2rem)]">{t("titulo", { dias: r.dias, ruta })}</h1>
           <ul className="flex flex-wrap gap-2">
             {datos.map(({ icono, texto }) => (
-              <li key={icono} className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-2 text-[0.88rem] font-semibold">
+              <li key={icono} className="inline-flex items-center gap-2 rounded-sm border border-line bg-card px-3 py-2 text-[0.88rem] font-semibold">
                 <Icono nombre={icono} className="size-4 text-orange-ink" /> {texto}
               </li>
             ))}
           </ul>
           {guardado.adjunto && (
-            <p className="flex w-fit items-center gap-2 rounded-sm border border-line bg-white px-3.5 py-2.5 text-[0.88rem] text-ink-2">
+            <p className="flex w-fit items-center gap-2 rounded-sm border border-line bg-card px-3.5 py-2.5 text-[0.88rem] text-ink-2">
               <Icono nombre="file" className="size-4 text-orange-ink" /> {t("adjunto")}
             </p>
           )}
@@ -106,7 +106,7 @@ async function Itinerario({ guardado }: { guardado: ItinerarioGuardado }) {
         <aside className="grid gap-5 rounded-panel bg-ink p-6 text-white max-[999px]:order-first min-[1000px]:sticky min-[1000px]:top-24">
           <div className="grid gap-2">
             <span className="eyebrow text-orange-light [--eyebrow-line:var(--color-orange-light)]">{t("precio.titulo")}</span>
-            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-head text-[1.1rem] font-extrabold">
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-head text-[1.1rem] font-light">
               {nombres.map((nombre, i) => (
                 <span key={`${i}-${nombre}`} className="inline-flex items-center gap-2">
                   {i > 0 && <Icono nombre="arrow" className="size-4 text-orange" />}
@@ -117,7 +117,7 @@ async function Itinerario({ guardado }: { guardado: ItinerarioGuardado }) {
           </div>
           <div className="grid gap-1 border-t border-white/14 pt-5">
             <small className="text-[0.85rem] text-white/70">{t("precio.desde")}</small>
-            <b className="font-head text-[2.4rem] leading-none font-extrabold">
+            <b className="font-head text-[2.4rem] leading-none font-light">
               {soles.format(itinerario.precio.porPersona)}{" "}
               <span className="text-[1rem] font-semibold text-white/70">{t("precio.porPersona")}</span>
             </b>

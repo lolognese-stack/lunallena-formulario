@@ -13,11 +13,11 @@ export async function Marca({ soloLogo = false, claro = false }: { soloLogo?: bo
         alt={soloLogo ? t("logoAlt") : ""}
         width={soloLogo ? 48 : 42}
         height={soloLogo ? 48 : 42}
-        className="rounded-[11px]"
+        className="rounded-full"
         priority={soloLogo}
       />
       {!soloLogo && (
-        <span className={`font-head text-[1.12rem] leading-none font-extrabold tracking-[-0.02em] ${claro ? "text-white" : ""}`}>
+        <span className={`font-head text-[1.12rem] leading-none font-medium tracking-[-0.02em] ${claro ? "text-white" : ""}`}>
           {t("nombre")}
           <small className={`mt-1 block text-[0.62rem] font-bold tracking-[0.32em] ${claro ? "text-white/60" : "text-muted"}`}>
             {t("sufijo")}

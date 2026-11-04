@@ -33,9 +33,9 @@ const MAX_RESULTADOS = 8;
 const normalizar = (s: string) => s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase();
 
 const claseSegmento =
-  "cursor-pointer rounded-full border-[1.5px] border-line bg-white px-3 py-2 text-[0.86rem] font-semibold transition-colors hover:border-[#cfc6be] aria-pressed:border-orange aria-pressed:bg-orange-soft";
+  "cursor-pointer rounded-full border-[1.5px] border-line bg-card px-3 py-2 text-[0.86rem] font-semibold transition-colors hover:border-[#cfc6be] aria-pressed:border-gold aria-pressed:bg-orange-soft";
 const claseCampo =
-  "w-full rounded-sm border-[1.5px] border-line bg-white px-3.5 py-3 text-[1rem] text-ink outline-offset-2 placeholder:text-[#8a8a8a] focus:border-ink";
+  "w-full rounded-sm border-[1.5px] border-line bg-card px-3.5 py-3 text-[1rem] text-ink outline-offset-2 placeholder:text-[#8a8a8a] focus:border-ink";
 
 export function DiaEditor({
   bloque,
@@ -76,10 +76,10 @@ export function DiaEditor({
   ] as const;
 
   return (
-    <li className="grid gap-4 rounded-panel border border-line bg-white p-[clamp(16px,3vw,24px)] shadow-card">
+    <li className="grid gap-4 rounded-panel border border-line bg-card p-[clamp(16px,3vw,24px)] shadow-card">
       <div className="flex items-center justify-between gap-3">
         <h3 className="flex items-center gap-2.5 text-[1.1rem]">
-          <span aria-hidden="true" className="grid size-8 place-items-center rounded-full bg-orange font-head text-[0.82rem] font-extrabold">
+          <span aria-hidden="true" className="grid size-8 place-items-center rounded-full bg-gold text-white font-head text-[0.82rem] font-light">
             {desde}
           </span>
           {titulo}
@@ -135,7 +135,7 @@ export function DiaEditor({
         )}
 
         {elegida && (
-          <div className="flex items-center justify-between gap-3 rounded-card border-[1.5px] border-orange bg-orange-soft p-3.5">
+          <div className="flex items-center justify-between gap-3 rounded-card border-[1.5px] border-gold bg-orange-soft p-3.5">
             <div className="grid gap-0.5">
               <b className="font-head">{elegida.nombre}</b>
               <small className="text-[0.86rem] text-ink-2">
@@ -222,7 +222,7 @@ function Buscador({
                   type="button"
                   disabled={noEntra}
                   onClick={() => onElegir(e)}
-                  className="grid w-full cursor-pointer gap-0.5 rounded-card border-[1.5px] border-line bg-white px-3.5 py-3 text-left transition-colors hover:border-orange disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:border-line"
+                  className="grid w-full cursor-pointer gap-0.5 rounded-card border-[1.5px] border-line bg-card px-3.5 py-3 text-left transition-colors hover:border-gold disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:border-line"
                 >
                   <b className="font-head text-[0.98rem]">{e.nombre}</b>
                   <small className="text-[0.84rem] text-muted">

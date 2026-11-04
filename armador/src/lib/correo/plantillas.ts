@@ -28,35 +28,40 @@ export interface Correo {
   minutos: number; // demora desde que terminó el quiz
 }
 
+// Paleta y tipografía del sitio (sección Paquetes, tema premium).
 const NARANJA = "#FF7A00";
-const TINTA = "#161616";
-const GRIS = "#5E5E5E";
-const ARENA = "#FBF8F5";
+const TINTA = "#1E1B18";
+const GRIS = "#6F665C";
+const ARENA = "#F5EEDD"; // fondo crema
+const HUESO = "#FBF8F3"; // tarjeta
+const LINEA = "#E2D9CE";
+const DORADO = "#8E6214";
+const FUENTE = "Manrope,'Helvetica Neue',Arial,sans-serif";
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 function boton(texto: string, url: string, verde = false) {
   const fondo = verde ? "#25D366" : NARANJA;
-  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px 0 8px"><tr><td style="background:${fondo};border-radius:10px">
-<a href="${esc(url)}" style="display:inline-block;padding:14px 26px;font:600 16px/1.2 Inter,Arial,sans-serif;color:${verde ? "#0B3D20" : "#FFFFFF"};text-decoration:none">${esc(texto)}</a></td></tr></table>`;
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px 0 8px"><tr><td style="background:${fondo};border-radius:2px">
+<a href="${esc(url)}" style="display:inline-block;padding:15px 24px;font:600 12px/1.2 ${FUENTE};letter-spacing:.18em;text-transform:uppercase;color:${verde ? "#0B3D20" : TINTA};text-decoration:none">${esc(texto)}</a></td></tr></table>`;
 }
 
 function marco(preheader: string, cuerpo: string) {
-  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Luna Llena Travel</title></head>
+  return `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Luna Llena Travel</title><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&display=swap" rel="stylesheet"></head>
 <body style="margin:0;background:${ARENA};-webkit-text-size-adjust:100%">
 <span style="display:none;max-height:0;overflow:hidden;opacity:0">${esc(preheader)}</span>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${ARENA}"><tr><td align="center" style="padding:28px 14px">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:580px;background:#FFFFFF;border:1px solid #ECE6E0;border-radius:16px">
-<tr><td style="padding:22px 28px;border-bottom:1px solid #ECE6E0;font:700 15px/1 Inter,Arial,sans-serif;color:${TINTA};letter-spacing:.02em">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:580px;background:${HUESO};border:1px solid ${LINEA};border-top:3px solid ${DORADO};border-radius:2px">
+<tr><td style="padding:22px 28px;border-bottom:1px solid ${LINEA};font:600 15px/1 ${FUENTE};color:${TINTA}">
 <span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${NARANJA};vertical-align:-2px;margin-right:8px"></span>Luna Llena Travel</td></tr>
-<tr><td style="padding:28px;font:400 16px/1.6 Inter,Arial,sans-serif;color:${TINTA}">${cuerpo}</td></tr>
-<tr><td style="padding:18px 28px 24px;border-top:1px solid #ECE6E0;font:400 12px/1.5 Inter,Arial,sans-serif;color:${GRIS}">
+<tr><td style="padding:28px;font:400 16px/1.6 ${FUENTE};color:${TINTA}">${cuerpo}</td></tr>
+<tr><td style="padding:18px 28px 24px;border-top:1px solid ${LINEA};font:400 12px/1.5 ${FUENTE};color:${GRIS}">
 Luna Llena Travel · Full Moon Travel Agency E.I.R.L. · RUC 20603319428 · Calle Chihuampata 543, San Blas, Cusco.<br>
 Te escribimos porque armaste un viaje en nuestra web. Si no quieres recibir más mails, responde "baja" a este mensaje.</td></tr>
 </table></td></tr></table></body></html>`;
 }
 
-const h1 = (t: string) => `<h1 style="margin:0 0 14px;font:800 26px/1.2 'Plus Jakarta Sans',Inter,Arial,sans-serif;color:${TINTA}">${t}</h1>`;
+const h1 = (t: string) => `<h1 style="margin:0 0 14px;font:300 30px/1.15 ${FUENTE};letter-spacing:-.02em;color:${TINTA}">${t}</h1>`;
 const p = (t: string) => `<p style="margin:0 0 14px">${t}</p>`;
 const firma = `<p style="margin:22px 0 0;color:${GRIS}">Un abrazo desde Cusco,<br><b style="color:${TINTA}">El equipo de Luna Llena</b></p>`;
 
@@ -74,8 +79,8 @@ export function armarCorreos(d: DatosCorreo): Correo[] {
       `Revisamos tu ruta por ${d.ruta}. Adentro, día por día y el precio desde.`,
       h1(`Tu viaje de ${d.dias} días ya tiene ruta`) +
         p(`Hola ${n}, revisamos lo que elegiste y ordenamos tu viaje por <b>${ruta}</b> respetando la altura, para que te aclimates sin perder días.`) +
-        `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:18px 0;background:${TINTA};border-radius:12px"><tr><td style="padding:20px 22px;font:400 14px/1.5 Inter,Arial,sans-serif;color:#D9D9D9">
-Precio desde, por persona<br><b style="font:800 30px/1.2 'Plus Jakarta Sans',Inter,Arial,sans-serif;color:#FFFFFF">${esc(d.precioPorPersona)}</b> <span style="color:#BDBDBD">(aprox. USD ${d.precioUsd})</span><br>
+        `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:18px 0;background:${TINTA};border-radius:2px"><tr><td style="padding:20px 22px;font:400 14px/1.5 ${FUENTE};color:#D9D2C8">
+Precio desde, por persona<br><b style="font:300 34px/1.2 ${FUENTE};color:#F6F1EA">${esc(d.precioPorPersona)}</b> <span style="color:#BDBDBD">(aprox. USD ${d.precioUsd})</span><br>
 <span style="font-size:12.5px;color:#A9A9A9">Experiencias y hoteles. No incluye vuelos internacionales.</span></td></tr></table>` +
         verItinerario +
         (d.conWhatsapp
@@ -112,8 +117,8 @@ Precio desde, por persona<br><b style="font:800 30px/1.2 'Plus Jakarta Sans',Int
       "El precio desde, explicado sin letra chica.",
       h1("Qué hay detrás del precio") +
         p(`Hola ${n}, tu itinerario sale desde <b>${esc(d.precioPorPersona)}</b> por persona. Así se arma ese número:`) +
-        `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 16px;border:1px solid #ECE6E0;border-radius:10px;font-size:15px">
-<tr><td style="padding:12px 16px;border-bottom:1px solid #ECE6E0"><b>Incluye</b><br><span style="color:${GRIS}">Hoteles de la categoría que elegiste, experiencias y entradas, tren a Machu Picchu cuando la ruta lo lleva, traslados y guía.</span></td></tr>
+        `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 16px;border:1px solid ${LINEA};border-radius:2px;font-size:15px">
+<tr><td style="padding:12px 16px;border-bottom:1px solid ${LINEA}"><b>Incluye</b><br><span style="color:${GRIS}">Hoteles de la categoría que elegiste, experiencias y entradas, tren a Machu Picchu cuando la ruta lo lleva, traslados y guía.</span></td></tr>
 <tr><td style="padding:12px 16px"><b>No incluye</b><br><span style="color:${GRIS}">Vuelos internacionales, comidas que no figuran en el itinerario y propinas.</span></td></tr></table>` +
         p(`Organizarlo por tu cuenta puede parecer más barato, pero los boletos de Machu Picchu y del tren se agotan en temporada. Nosotros los reservamos con anticipación y tú no pierdes tiempo organizando.`) +
         verItinerario +
@@ -149,7 +154,7 @@ Precio desde, por persona<br><b style="font:800 30px/1.2 'Plus Jakarta Sans',Int
         p(`Hola ${n}, hace unos días armaste tu viaje de ${d.dias} días por <b>${ruta}</b>. Si todavía lo estás pensando, podemos ajustarlo contigo: fechas, ritmo, hoteles o presupuesto.`) +
         p(`Escríbenos por WhatsApp y te responde una persona del equipo en Cusco.`) +
         wa("Escribir por WhatsApp") +
-        p(`<a href="${esc(d.urlItinerario)}" style="color:#B34D00">Volver a ver mi itinerario</a>`) +
+        p(`<a href="${esc(d.urlItinerario)}" style="color:${DORADO}">Volver a ver mi itinerario</a>`) +
         firma,
     ),
     texto: `Hola ${d.nombre}, ¿armamos tu viaje juntos? Escríbenos por WhatsApp: ${d.urlWhatsapp}\nTu itinerario: ${d.urlItinerario}\n`,

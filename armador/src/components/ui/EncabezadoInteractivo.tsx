@@ -28,7 +28,7 @@ export function EncabezadoInteractivo({ marca, accion, enlaces, navAria, abrirMe
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b bg-white/88 backdrop-blur-[14px] backdrop-saturate-[1.4] transition-[border-color,box-shadow] duration-300 ${
+      className={`sticky top-0 z-50 border-b bg-[rgba(246,241,234,.9)] backdrop-blur-[14px] backdrop-saturate-[1.4] transition-[border-color,box-shadow] duration-300 ${
         conScroll ? "border-line shadow-[0_6px_24px_-18px_rgba(0,0,0,.35)]" : "border-transparent"
       }`}
     >
@@ -39,7 +39,7 @@ export function EncabezadoInteractivo({ marca, accion, enlaces, navAria, abrirMe
           aria-label={navAria}
           className={`ml-auto gap-1.5 min-[901px]:flex ${
             abierto
-              ? "absolute inset-x-0 top-[72px] flex flex-col border-b border-line bg-white px-4 pt-3 pb-5 shadow-card"
+              ? "absolute inset-x-0 top-[72px] flex flex-col border-b border-line bg-bg px-4 pt-3 pb-5 shadow-card"
               : "hidden"
           }`}
         >
@@ -49,7 +49,7 @@ export function EncabezadoInteractivo({ marca, accion, enlaces, navAria, abrirMe
               href={e.href}
               aria-current={e.actual ? "page" : undefined}
               onClick={() => setAbierto(false)}
-              className="rounded-full px-3.5 py-2.5 text-[0.95rem] font-semibold text-ink-2 no-underline transition-colors hover:bg-orange-soft hover:text-ink aria-[current=page]:bg-orange-soft aria-[current=page]:text-ink max-[900px]:px-3 max-[900px]:py-3.5 max-[900px]:text-[1.05rem]"
+              className="px-3.5 py-2.5 text-[0.74rem] leading-none font-medium tracking-[0.22em] text-ink-2 uppercase no-underline transition-colors hover:text-orange-ink aria-[current=page]:text-orange-ink max-[900px]:px-3 max-[900px]:py-3.5 max-[900px]:text-[0.85rem]"
             >
               {e.texto}
             </a>
@@ -59,7 +59,7 @@ export function EncabezadoInteractivo({ marca, accion, enlaces, navAria, abrirMe
           {accion}
           <button
             type="button"
-            className="grid size-11 cursor-pointer place-items-center rounded-sm bg-sand min-[901px]:hidden"
+            className="grid size-11 cursor-pointer place-items-center rounded-sm border border-line min-[901px]:hidden"
             aria-label={abierto ? cerrarMenu : abrirMenu}
             aria-expanded={abierto}
             aria-controls="nav"
