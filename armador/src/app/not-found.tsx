@@ -12,7 +12,7 @@ export default async function NoEncontrado() {
         <span className="eyebrow">404</span>
         <h1 className="text-[clamp(2rem,4.4vw,3rem)]">{t("titulo")}</h1>
         <p className="lead">{t("texto")}</p>
-        <Boton href="/armar">{t("boton")}</Boton>
+        <Boton href="/">{t("boton")}</Boton>
       </main>
       <Pie />
     </>

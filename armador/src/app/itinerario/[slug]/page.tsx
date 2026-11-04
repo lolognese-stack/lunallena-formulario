@@ -138,7 +138,7 @@ async function Itinerario({ guardado }: { guardado: ItinerarioGuardado }) {
                 <IconoWhatsApp /> {t("acciones.whatsapp")}
               </Boton>
             )}
-            <Boton href="/armar" variante="claro" bloque>
+            <Boton href="/" variante="claro" bloque>
               {t("acciones.otro")}
             </Boton>
           </div>

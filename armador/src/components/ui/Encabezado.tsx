@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import { BASE } from "@/lib/contacto";
-import { Boton } from "./Boton";
 import { EncabezadoInteractivo } from "./EncabezadoInteractivo";
 import { Marca } from "./Marca";
 
@@ -24,11 +23,7 @@ export async function Encabezado() {
       navAria={t("navAria")}
       abrirMenu={t("abrirMenu")}
       cerrarMenu={t("cerrarMenu")}
-      accion={
-        <Boton href="/armar" className="max-[900px]:hidden">
-          {t("consultar")}
-        </Boton>
-      }
+      accion={null}
     />
   );
 }
