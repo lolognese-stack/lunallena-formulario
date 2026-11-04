@@ -259,6 +259,29 @@ export function Asistente({ destinos }: { destinos: DestinoOpcion[] }) {
       {paso === 7 && (
         <section className="mt-3 grid gap-6">
           <Encabezado titulo={t("contacto.titulo")} lead={t("contacto.lead")} refTitulo={titulo} />
+          {/* Autoridad antes de pedir los datos (mismos datos que /nosotros del sitio) */}
+          <div aria-label={t("autoridad.aria")} className="grid gap-4">
+            <dl className="grid grid-cols-4 border-y border-line max-[760px]:grid-cols-2">
+              {(["viajeros", "anios", "tripadvisor", "formal"] as const).map((k, i) => (
+                <div
+                  key={k}
+                  className={`grid content-start gap-1.5 px-4 py-5 max-[760px]:px-3 max-[760px]:py-4 ${i > 0 ? "border-l border-line" : ""} ${
+                    i === 2 ? "max-[760px]:border-l-0" : ""
+                  } ${i >= 2 ? "max-[760px]:border-t" : ""}`}
+                >
+                  <dt className="flex items-baseline gap-1.5 font-head text-[1.7rem] leading-none font-light tracking-[-0.03em] max-[760px]:text-[1.35rem]">
+                    {t(`autoridad.${k}.dato`)}
+                    {k === "tripadvisor" && <span aria-hidden="true" className="text-[0.95rem] tracking-[0.1em] text-orange-ink">★★★★★</span>}
+                  </dt>
+                  <dd className="text-[0.84rem] leading-[1.4] text-muted">{t(`autoridad.${k}.texto`)}</dd>
+                </div>
+              ))}
+            </dl>
+            <figure className="tarjeta-pkg grid gap-2 px-5 py-4">
+              <blockquote className="text-[0.98rem] leading-relaxed text-ink-2">“{t("autoridad.cita")}”</blockquote>
+              <figcaption className="text-[0.8rem] text-muted">{t("autoridad.citaAutor")} · {t("autoridad.guias")}</figcaption>
+            </figure>
+          </div>
           <div className="grid max-w-[520px] gap-4">
             <Campo etiqueta={t("contacto.nombre")} valor={nombre} onCambio={setNombre} autoComplete="name" error={tocado && nombre.trim().length < 2 ? t("contacto.nombreFalta") : null} />
             <Campo etiqueta={t("contacto.email")} valor={email} onCambio={setEmail} tipo="email" autoComplete="email" error={tocado && !EMAIL.test(email.trim()) ? t("contacto.emailInvalido") : null} />

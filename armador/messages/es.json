@@ -289,6 +289,28 @@
       "verCorreos": "Ver los 5 mails",
       "nivel": "Score: {nivel}",
       "otro": "Armar otro viaje"
+    },
+    "autoridad": {
+      "aria": "Por qué confiar en Luna Llena Travel",
+      "viajeros": {
+        "dato": "+1.000",
+        "texto": "viajeros ya recorrieron Perú con nosotros"
+      },
+      "anios": {
+        "dato": "8 años",
+        "texto": "organizando viajes desde 2018"
+      },
+      "tripadvisor": {
+        "dato": "4,9",
+        "texto": "de 5 en TripAdvisor"
+      },
+      "formal": {
+        "dato": "Agencia formal",
+        "texto": "RUC 20603319428 · oficina en San Blas, Cusco"
+      },
+      "cita": "El itinerario también fue cuidadosamente diseñado para ayudar con la aclimatación de altitud. La compañía es de propiedad local, y se nota.",
+      "citaAutor": "Koyi K · Reseña en TripAdvisor, dic. 2025",
+      "guias": "Te atienden nuestros 5 guías oficiales de turismo, en español e inglés."
     }
   }
 }
