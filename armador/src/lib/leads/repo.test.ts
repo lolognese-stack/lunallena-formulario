@@ -15,21 +15,27 @@ const sinTablas = () =>
   new Proxy({}, { get: () => async () => { throw Object.assign(new Error("Could not find the table"), { code: "PGRST205" }); } }) as RepoLeads;
 
 function dbFalso() {
-  const insert = vi.fn(() => ({ select: () => ({ single: async () => ({ data: { id: "q-1", created_at: "2026-11-05T00:00:00Z" }, error: null }) }) }));
-  return { db: { from: vi.fn(() => ({ insert })) } as unknown as SupabaseClient, insert };
+  const update = vi.fn(() => ({ eq: async () => ({ error: null }) }));
+  const select = vi.fn(() => ({ eq: () => ({ single: async () => ({ data: { answers: { dias: 7 }, created_at: "2026-11-05T00:00:00Z" }, error: null }) }) }));
+  return { db: { from: vi.fn(() => ({ select, update })) } as unknown as SupabaseClient, update };
 }
 
 describe("respaldo sin tablas v2", () => {
-  it("guarda el lead en quote_requests con todo el detalle", async () => {
-    const { db, insert } = dbFalso();
+  it("guarda el lead dentro de su itinerario (answers.lead_v2) con todo el detalle", async () => {
+    const { db, update } = dbFalso();
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
     const lead = await new RepoConRespaldo(sinTablas(), db).crearLead(LEAD);
-    expect(lead).toMatchObject({ id: "q-1", codigo: "LL-ABCDE", grupo: "calificado", estado: "nuevo" });
-    expect(db.from).toHaveBeenCalledWith("quote_requests");
-    const fila = (insert.mock.calls[0] as unknown[])[0] as Record<string, unknown>;
-    expect(fila).toMatchObject({ code: "LL-ABCDE", name: "Ana", email: "a@b.co", whatsapp: "+51987654321", travelers: 2, month: 1, status: "nuevo" });
-    expect(JSON.parse(fila.notes as string)).toMatchObject({ origen: "armador-v2", score: { total: 61, grupo: "calificado" }, itinerarioSlug: "slug", utm: { source: "ig" } });
+    expect(lead).toMatchObject({ id: "itinerario-slug", codigo: "LL-ABCDE", grupo: "calificado", estado: "nuevo" });
+    expect(db.from).toHaveBeenCalledWith("itineraries");
+    const answers = ((update.mock.calls[0] as unknown[])[0] as { answers: Record<string, unknown> }).answers;
+    expect(answers.dias).toBe(7); // conserva lo que ya tenía
+    expect(answers.lead_v2).toMatchObject({ codigo: "LL-ABCDE", nombre: "Ana", email: "a@b.co", whatsapp: "+51987654321", origen: "armador-v2", score: { total: 61, grupo: "calificado" }, utm: { source: "ig" } });
     warn.mockRestore();
+  });
+
+  it("sin itinerario guardado no hay dónde respaldar: error", async () => {
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    await expect(new RepoConRespaldo(sinTablas(), dbFalso().db).crearLead({ ...LEAD, itinerarioSlug: null })).rejects.toThrow("no hay itinerario");
   });
 
   it("el resto no rompe: devuelve vacío", async () => {

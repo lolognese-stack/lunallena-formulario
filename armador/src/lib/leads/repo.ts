@@ -270,8 +270,8 @@ export class RepoSupabase implements RepoLeads {
 export const faltaTabla = (e: unknown) => ["PGRST205", "42P01"].includes((e as { code?: string })?.code ?? "");
 
 /**
- * Envuelve RepoSupabase. Si faltan las tablas v2, el lead se guarda en `quote_requests`
- * (tabla que ya existía) con todo el detalle en `notes`, para no perder ninguno. Eventos,
+ * Envuelve RepoSupabase. Si faltan las tablas v2, el lead se guarda dentro de su itinerario
+ * (tabla `itineraries`, columna answers.lead_v2) con todo el detalle, para no perder ninguno. Eventos,
  * cola de mails y rate limit quedan sin efecto hasta que se cree la base nueva; en cuanto
  * existe, todo pasa solo al repositorio normal.
  */
@@ -285,7 +285,7 @@ export class RepoConRespaldo implements RepoLeads {
     } catch (e) {
       if (!faltaTabla(e)) throw e;
       if (!this.avisado) {
-        console.warn("Faltan las tablas del armador v2 (lead, evento, mail_cola, intento_ip): se usa el respaldo en quote_requests.");
+        console.warn("Faltan las tablas del armador v2 (lead, evento, mail_cola, intento_ip): se usa el respaldo en itineraries.answers.lead_v2.");
         this.avisado = true;
       }
       return respaldo();
@@ -298,7 +298,7 @@ export class RepoConRespaldo implements RepoLeads {
       async () => {
         const notas = {
           origen: "armador-v2",
-          aviso: "Guardado en quote_requests porque faltan las tablas v2 (correr supabase/migraciones/001_leads_v2.sql).",
+          aviso: "Guardado en itineraries.answers.lead_v2 porque faltan las tablas v2 (correr supabase/migraciones/001_leads_v2.sql).",
           score: { total: datos.scoreTotal, grupo: datos.grupo, version: datos.scoreVersion, reglas: datos.reglasAplicadas, desglose: datos.scoreDesglose },
           puente: { vio: datos.vioPuente, preguntas: datos.preguntasPuente, respuestas: datos.respuestasPuente },
           respuestas: datos.respuestas,
@@ -308,23 +308,18 @@ export class RepoConRespaldo implements RepoLeads {
           utm: datos.utm,
           referrer: datos.referrer,
         };
-        const { data, error } = await this.db
-          .from("quote_requests")
-          .insert({
-            code: datos.codigo,
-            name: datos.nombre,
-            email: datos.email,
-            whatsapp: datos.whatsapp ?? datos.whatsappCrudo ?? "",
-            travelers: datos.respuestas.viajeros,
-            month: datos.respuestas.mes,
-            notes: JSON.stringify(notas),
-            status: "nuevo",
-          })
-          .select("id, created_at")
-          .single();
+        // Se anota en el itinerario que ya se guardó (answers.lead_v2): misma fila, sin tablas nuevas.
+        if (!datos.itinerarioSlug) throw new Error("No se pudo guardar el lead (respaldo): no hay itinerario guardado.");
+        const contacto = { codigo: datos.codigo, nombre: datos.nombre, email: datos.email, whatsapp: datos.whatsapp };
+        const leida = await this.db.from("itineraries").select("answers, created_at").eq("share_slug", datos.itinerarioSlug).single();
+        falla(leida.error, "No se pudo leer el itinerario (respaldo)");
+        const fila = leida.data as { answers: Record<string, unknown>; created_at: string };
+        const { error } = await this.db
+          .from("itineraries")
+          .update({ answers: { ...fila.answers, lead_v2: { ...contacto, ...notas } } })
+          .eq("share_slug", datos.itinerarioSlug);
         falla(error, "No se pudo guardar el lead (respaldo)");
-        const fila = data as { id: string; created_at: string };
-        return { ...datos, id: fila.id, creadoEn: fila.created_at, estado: datos.estado ?? "nuevo" };
+        return { ...datos, id: `itinerario-${datos.itinerarioSlug}`, creadoEn: fila.created_at, estado: datos.estado ?? "nuevo" };
       },
     );
   }
