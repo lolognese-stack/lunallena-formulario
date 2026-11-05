@@ -7,7 +7,7 @@ import { obtenerCatalogo } from "@/lib/datos/catalogo";
 import { guardarItinerario } from "@/lib/datos/itinerarios";
 import { referenciasDe } from "@/lib/datos/referencias";
 import { clienteServicio } from "@/lib/datos/supabase";
-import { RepoMemoria, RepoSupabase, type RepoLeads } from "./repo";
+import { RepoConRespaldo, RepoMemoria, RepoSupabase, type RepoLeads } from "./repo";
 import type { ConfigLeads, DepsLeads } from "./servicio";
 
 // Dependencias reales de los endpoints. Variables de entorno: ver .env.example.
@@ -16,7 +16,10 @@ const memoria = ((globalThis as { __repoLeadsMemoria?: RepoMemoria }).__repoLead
 
 export function repoLeads(): RepoLeads {
   const db = clienteServicio();
-  if (db) return new RepoSupabase(db as unknown as SupabaseClient);
+  if (db) {
+    const cliente = db as unknown as SupabaseClient;
+    return new RepoConRespaldo(new RepoSupabase(cliente), cliente);
+  }
   // Sin base: solo en desarrollo (o probando el build con ITINERARIOS_EN_MEMORIA=1).
   if (process.env.NODE_ENV === "production" && process.env.ITINERARIOS_EN_MEMORIA !== "1") {
     throw new Error("Falta SUPABASE_SECRET_KEY: no se pueden guardar leads.");

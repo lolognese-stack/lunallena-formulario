@@ -263,3 +263,111 @@ export class RepoSupabase implements RepoLeads {
     return count ?? 0;
   }
 }
+
+// ---------- Respaldo mientras no existan las tablas v2 ----------
+
+/** PostgREST: la tabla no existe (todavía no se corrió supabase/migraciones/001_leads_v2.sql). */
+export const faltaTabla = (e: unknown) => ["PGRST205", "42P01"].includes((e as { code?: string })?.code ?? "");
+
+/**
+ * Envuelve RepoSupabase. Si faltan las tablas v2, el lead se guarda en `quote_requests`
+ * (tabla que ya existía) con todo el detalle en `notes`, para no perder ninguno. Eventos,
+ * cola de mails y rate limit quedan sin efecto hasta que se cree la base nueva; en cuanto
+ * existe, todo pasa solo al repositorio normal.
+ */
+export class RepoConRespaldo implements RepoLeads {
+  private avisado = false;
+  constructor(private base: RepoLeads, private db: SupabaseClient) {}
+
+  private async intentar<T>(f: () => Promise<T>, respaldo: () => T | Promise<T>): Promise<T> {
+    try {
+      return await f();
+    } catch (e) {
+      if (!faltaTabla(e)) throw e;
+      if (!this.avisado) {
+        console.warn("Faltan las tablas del armador v2 (lead, evento, mail_cola, intento_ip): se usa el respaldo en quote_requests.");
+        this.avisado = true;
+      }
+      return respaldo();
+    }
+  }
+
+  crearLead(datos: LeadNuevo) {
+    return this.intentar(
+      () => this.base.crearLead(datos),
+      async () => {
+        const notas = {
+          origen: "armador-v2",
+          aviso: "Guardado en quote_requests porque faltan las tablas v2 (correr supabase/migraciones/001_leads_v2.sql).",
+          score: { total: datos.scoreTotal, grupo: datos.grupo, version: datos.scoreVersion, reglas: datos.reglasAplicadas, desglose: datos.scoreDesglose },
+          puente: { vio: datos.vioPuente, preguntas: datos.preguntasPuente, respuestas: datos.respuestasPuente },
+          respuestas: datos.respuestas,
+          precioDesdeUsd: datos.precioDesde,
+          itinerarioSlug: datos.itinerarioSlug,
+          whatsappCrudo: datos.whatsappCrudo,
+          utm: datos.utm,
+          referrer: datos.referrer,
+        };
+        const { data, error } = await this.db
+          .from("quote_requests")
+          .insert({
+            code: datos.codigo,
+            name: datos.nombre,
+            email: datos.email,
+            whatsapp: datos.whatsapp ?? datos.whatsappCrudo ?? "",
+            travelers: datos.respuestas.viajeros,
+            month: datos.respuestas.mes,
+            notes: JSON.stringify(notas),
+            status: "nuevo",
+          })
+          .select("id, created_at")
+          .single();
+        falla(error, "No se pudo guardar el lead (respaldo)");
+        const fila = data as { id: string; created_at: string };
+        return { ...datos, id: fila.id, creadoEn: fila.created_at, estado: datos.estado ?? "nuevo" };
+      },
+    );
+  }
+  obtenerLead(id: string) {
+    return this.intentar(() => this.base.obtenerLead(id), () => null);
+  }
+  buscarPorHuella(huella: string, desde: Date) {
+    return this.intentar(() => this.base.buscarPorHuella(huella, desde), () => null);
+  }
+  actualizarLead(id: string, cambios: Parameters<RepoLeads["actualizarLead"]>[1]) {
+    return this.intentar(() => this.base.actualizarLead(id, cambios), () => undefined);
+  }
+  registrarEvento(e: Evento) {
+    return this.intentar(() => this.base.registrarEvento(e), () => undefined);
+  }
+  listarEventos(leadId: string) {
+    return this.intentar(() => this.base.listarEventos(leadId), () => []);
+  }
+  encolarMails(mails: MailNuevo[]) {
+    return this.intentar(() => this.base.encolarMails(mails), () => undefined);
+  }
+  listarMails(leadId: string) {
+    return this.intentar(() => this.base.listarMails(leadId), () => []);
+  }
+  cancelarMailsPendientes(leadId: string) {
+    return this.intentar(() => this.base.cancelarMailsPendientes(leadId), () => 0);
+  }
+  mailsVencidos(ahora: Date, limite: number) {
+    return this.intentar(() => this.base.mailsVencidos(ahora, limite), () => []);
+  }
+  tomarMail(id: number, intentosLeidos: number) {
+    return this.intentar(() => this.base.tomarMail(id, intentosLeidos), () => false);
+  }
+  marcarMailEnviado(id: number, resendId: string, enviadoEn: Date) {
+    return this.intentar(() => this.base.marcarMailEnviado(id, resendId, enviadoEn), () => undefined);
+  }
+  marcarMailFallido(id: number, error: string, cancelar: boolean) {
+    return this.intentar(() => this.base.marcarMailFallido(id, error, cancelar), () => undefined);
+  }
+  registrarIntentoIp(ipHash: string) {
+    return this.intentar(() => this.base.registrarIntentoIp(ipHash), () => undefined);
+  }
+  contarIntentosIp(ipHash: string, desde: Date) {
+    return this.intentar(() => this.base.contarIntentosIp(ipHash, desde), () => 0);
+  }
+}
