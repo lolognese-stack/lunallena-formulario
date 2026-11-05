@@ -1,6 +1,7 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { WHATSAPP_NUMERO } from "@/lib/contacto";
+import { urlPublica, WHATSAPP_NUMERO } from "@/lib/contacto";
+import { mailerResend } from "@/lib/correo/resend";
 import { crmSink } from "@/lib/crm/sink";
 import { obtenerCatalogo } from "@/lib/datos/catalogo";
 import { guardarItinerario } from "@/lib/datos/itinerarios";
@@ -53,4 +54,15 @@ export async function depsLeads(): Promise<DepsLeads> {
 export function ipDe(req: Request): string | null {
   const xff = req.headers.get("x-forwarded-for");
   return xff?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || null;
+}
+
+/** Dependencias de la cola de mails y del score vivo. */
+export function depsCola() {
+  return {
+    repo: repoLeads(),
+    crm: crmSink(),
+    mailer: mailerResend(),
+    ahora: () => new Date(),
+    config: { urlPublica: urlPublica(), alertasEmail: process.env.ALERTAS_EMAIL || null },
+  };
 }

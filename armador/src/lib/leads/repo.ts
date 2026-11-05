@@ -25,6 +25,14 @@ export interface RepoLeads {
   cancelarMailsPendientes(leadId: string): Promise<number>;
   /** Mails pendientes con enviar_en <= ahora, los más viejos primero. */
   mailsVencidos(ahora: Date, limite: number): Promise<MailEnCola[]>;
+  /**
+   * Reserva un mail pendiente para mandarlo: sube `intentos` solo si sigue pendiente y con los
+   * mismos intentos que se leyeron. Si otra corrida del cron lo tomó antes, devuelve false.
+   */
+  tomarMail(id: number, intentosLeidos: number): Promise<boolean>;
+  marcarMailEnviado(id: number, resendId: string, enviadoEn: Date): Promise<void>;
+  /** Anota el error. Con `cancelar`, deja de reintentarse. */
+  marcarMailFallido(id: number, error: string, cancelar: boolean): Promise<void>;
   registrarIntentoIp(ipHash: string): Promise<void>;
   contarIntentosIp(ipHash: string, desde: Date): Promise<number>;
 }
@@ -68,7 +76,7 @@ export class RepoMemoria implements RepoLeads {
     for (const m of mails) this.mails.push({ id: this.mails.length + 1, leadId: m.leadId, plantilla: m.plantilla, enviarEn: m.enviarEn.toISOString(), estado: "pendiente", intentos: 0 });
   }
   async listarMails(leadId: string) {
-    return this.mails.filter((m) => m.leadId === leadId);
+    return structuredClone(this.mails.filter((m) => m.leadId === leadId));
   }
   async cancelarMailsPendientes(leadId: string) {
     let n = 0;
@@ -76,7 +84,22 @@ export class RepoMemoria implements RepoLeads {
     return n;
   }
   async mailsVencidos(ahora: Date, limite: number) {
-    return this.mails.filter((m) => m.estado === "pendiente" && new Date(m.enviarEn) <= ahora).sort((a, b) => a.enviarEn.localeCompare(b.enviarEn)).slice(0, limite);
+    // Copias, como las filas que devuelve la base.
+    return structuredClone(this.mails.filter((m) => m.estado === "pendiente" && new Date(m.enviarEn) <= ahora).sort((a, b) => a.enviarEn.localeCompare(b.enviarEn)).slice(0, limite));
+  }
+  async tomarMail(id: number, intentosLeidos: number) {
+    const m = this.mails.find((x) => x.id === id);
+    if (!m || m.estado !== "pendiente" || m.intentos !== intentosLeidos) return false;
+    m.intentos++;
+    return true;
+  }
+  async marcarMailEnviado(id: number, resendId: string, enviadoEn: Date) {
+    const m = this.mails.find((x) => x.id === id);
+    if (m) Object.assign(m, { estado: "enviado", resendId, enviadoEn: enviadoEn.toISOString() });
+  }
+  async marcarMailFallido(id: number, error: string, cancelar: boolean) {
+    const m = this.mails.find((x) => x.id === id);
+    if (m) Object.assign(m, { error, ...(cancelar && { estado: "cancelado" }) });
   }
   async registrarIntentoIp(ipHash: string) {
     this.intentos.push({ ipHash, creadoEn: this.reloj() });
@@ -210,6 +233,25 @@ export class RepoSupabase implements RepoLeads {
     const { data, error } = await this.db.from("mail_cola").select("*").eq("estado", "pendiente").lte("enviar_en", ahora.toISOString()).order("enviar_en").limit(limite);
     falla(error, "No se pudo leer la cola de mails");
     return (data ?? []).map(deMail);
+  }
+  async tomarMail(id: number, intentosLeidos: number) {
+    const { data, error } = await this.db
+      .from("mail_cola")
+      .update({ intentos: intentosLeidos + 1 })
+      .eq("id", id)
+      .eq("estado", "pendiente")
+      .eq("intentos", intentosLeidos)
+      .select("id");
+    falla(error, "No se pudo tomar el mail");
+    return (data?.length ?? 0) > 0;
+  }
+  async marcarMailEnviado(id: number, resendId: string, enviadoEn: Date) {
+    const { error } = await this.db.from("mail_cola").update({ estado: "enviado", resend_id: resendId, enviado_en: enviadoEn.toISOString(), error: null }).eq("id", id);
+    falla(error, "No se pudo marcar el mail como enviado");
+  }
+  async marcarMailFallido(id: number, mensaje: string, cancelar: boolean) {
+    const { error } = await this.db.from("mail_cola").update({ error: mensaje.slice(0, 500), ...(cancelar && { estado: "cancelado" }) }).eq("id", id);
+    falla(error, "No se pudo anotar el error del mail");
   }
   async registrarIntentoIp(ipHash: string) {
     const { error } = await this.db.from("intento_ip").insert({ ip_hash: ipHash });

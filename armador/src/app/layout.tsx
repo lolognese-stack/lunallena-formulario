@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import "./globals.css";
+import { Visita } from "@/components/quiz/Visita";
 import { BASE } from "@/lib/contacto";
 
 // Misma tipografía que el sitio (tema premium): Manrope liviana en títulos y texto.
@@ -29,6 +30,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html lang={locale} className={manrope.variable}>
       <body className="flex min-h-dvh flex-col">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <Visita />
       </body>
     </html>
   );

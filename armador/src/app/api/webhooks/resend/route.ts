@@ -4,7 +4,7 @@ import { crmSink } from "@/lib/crm/sink";
 import { repoLeads } from "@/lib/leads/deps";
 import { registrarEventoResend, type EventoResend } from "@/lib/leads/webhook";
 
-// POST /armador/api/webhooks/resend: eventos de Resend (email.sent, email.clicked).
+// POST /armador/api/webhooks/resend: clics en los mails (email.clicked) → evento + score vivo (+5 por mail).
 // En Resend → Webhooks: URL https://lunallenatravel.vercel.app/armador/api/webhooks/resend/
 // y el "signing secret" en RESEND_WEBHOOK_SECRET.
 export async function POST(req: Request) {
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "json" }, { status: 400 });
   }
   try {
-    const r = await registrarEventoResend(ev, h.id, { repo: repoLeads(), crm: crmSink() });
+    const r = await registrarEventoResend(ev, h.id, { repo: repoLeads(), crm: crmSink(), ahora: () => new Date() });
     return NextResponse.json({ ok: true, ...r });
   } catch (e) {
     console.error("Webhook Resend:", e);

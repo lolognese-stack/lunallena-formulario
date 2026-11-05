@@ -61,4 +61,7 @@ export interface MailEnCola {
   enviarEn: string;
   estado: EstadoMail;
   intentos: number;
+  resendId?: string | null;
+  enviadoEn?: string | null;
+  error?: string | null;
 }

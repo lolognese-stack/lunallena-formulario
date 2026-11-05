@@ -338,15 +338,16 @@ describe("webhook de Resend", () => {
     expect(firmaSvixValida(body, { ...h, id: null }, SECRETO, INICIO.getTime())).toBe(false);
   });
 
-  it("registra clic y envío del lead de la etiqueta; ignora el resto", async () => {
+  it("registra el clic del lead de la etiqueta y suma +5; ignora el resto", async () => {
     const { leadId } = (await crearLead(cuerpo(), { ip: null }, deps)).body as { leadId: string };
     const tags = [{ name: "lead_id", value: leadId }, { name: "mail_id", value: "7" }];
-    expect(await registrarEventoResend({ type: "email.clicked", data: { email_id: "re_1", tags, click: { link: "https://x" } } }, "msg_1", deps)).toEqual({ registrado: true });
-    expect(await registrarEventoResend({ type: "email.sent", data: { tags: { lead_id: leadId } } }, "msg_2", deps)).toEqual({ registrado: true });
+    expect(await registrarEventoResend({ type: "email.clicked", data: { email_id: "re_1", tags, click: { link: "https://x" } } }, "msg_1", deps)).toEqual({ registrado: true, puntos: true });
+    // El envío lo registra la cola, no el webhook.
+    expect(await registrarEventoResend({ type: "email.sent", data: { tags: { lead_id: leadId } } }, "msg_2", deps)).toEqual({ registrado: false, motivo: "tipo_ignorado" });
     expect(await registrarEventoResend({ type: "email.opened", data: { tags } }, "msg_3", deps)).toEqual({ registrado: false, motivo: "tipo_ignorado" });
     expect(await registrarEventoResend({ type: "email.clicked", data: {} }, "msg_4", deps)).toEqual({ registrado: false, motivo: "sin_lead" });
     expect(await registrarEventoResend({ type: "email.clicked", data: { tags: { lead_id: "otro" } } }, "msg_5", deps)).toEqual({ registrado: false, motivo: "lead_no_existe" });
-    expect(repo.eventos.filter((e) => e.leadId === leadId).map((e) => e.tipo)).toEqual(["envio", "mail_clic", "mail_enviado"]);
+    expect(repo.eventos.filter((e) => e.leadId === leadId).map((e) => e.tipo)).toEqual(["envio", "mail_clic", "cambio_score"]);
     expect(repo.eventos.find((e) => e.tipo === "mail_clic")!.payload).toEqual({ mailId: "7", resendId: "re_1", link: "https://x", svixId: "msg_1" });
   });
 

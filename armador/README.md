@@ -42,6 +42,8 @@ está fuera del sitio estático (`.vercelignore`) y se publica aparte:
   `score-parcial`, `lead`, `lead/[id]/wa-click`, `webhooks/resend`, `cron/mails`.
 - Base de datos: correr una vez `supabase/migraciones/001_leads_v2.sql` en Supabase → SQL Editor
   (solo agrega las tablas `lead`, `evento`, `mail_cola` e `intento_ip`, con RLS y sin políticas).
-- Tiempos de la secuencia de mails: `src/lib/correo/secuencia.ts`.
+- Tiempos de la secuencia de mails: `src/lib/correo/secuencia.ts`. Textos: `TEXTOS` en `src/lib/correo/plantillas.ts`.
+- Cola: `src/lib/leads/cola.ts`, la dispara cada 5 min el Worker de `cron-worker/` (ver su README).
+- Score vivo (clic +5 por mail, visita +10 por día): `src/lib/leads/vivo.ts`.
 - CRM: interfaz `CrmSink` en `src/lib/crm/sink.ts` (hoy no hace nada).
 - Variables de entorno: `.env.example`.
